@@ -129,6 +129,15 @@ describe('Obfuscate Email', () => {
 
     expect(result).equal('ema***.w***ut@***.***');
   });
+  it(`Unknown options should not throw`, () => {
+    let error = null;
+    try {
+      obfuscate('', { badOption: 1 });
+    } catch (e) {
+      error = e;
+    }
+    expect(error).to.be.null;
+  });
   it(`Invalid options should throw`, () => {
     try {
       obfuscate('', { minimumNameObfuscationLength: 'string' });
