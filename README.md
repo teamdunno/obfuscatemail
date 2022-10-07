@@ -39,7 +39,6 @@ obfuscate('example@example.com');
 ```js
 const result = obfuscate('example@example.com');
 expect(result).equal('exa******@***.com');
-
 ```
 
 ```js
@@ -50,19 +49,16 @@ expect(result).equal('exa***.e***le@***.com');
 ```js
 const result = obfuscate('e@example.com');
 expect(result).equal('******@***.com');
-
 ```
 
 ```js
 const result = obfuscate('exa@example.com');
 expect(result).equal('******@***.com');
-
 ```
 
 ```js
 const result = obfuscate('examp@example.com');
 expect(result).equal('e******@***.com');
-
 ```
 
 ```js
@@ -77,7 +73,6 @@ const result = obfuscate('example.company+test@example.com', {
   asterisksLength: 12,
 });
 expect(result).equal('exa******mp******st@*********.com');
-
 ```
 
 ```js
@@ -86,7 +81,6 @@ const result = obfuscate('example@example.com', {
   showDomainExtension: false,
 });
 expect(result).equal('exa******@example.***');
-
 ```
 
 ```js
@@ -97,7 +91,6 @@ const result = obfuscate('company.name@test.com', {
   showDomainName: false,
 });
 expect(result).equal('co****ny****ame@*****.com');
-
 ```
 
 ```js
@@ -107,7 +100,6 @@ const result = obfuscate('company.name@test.com', {
   minimumNameObfuscationLength: 6,
 });
 expect(result).equal('comp***.***e@***.com');
-
 ```
 
 ```js
@@ -117,7 +109,6 @@ const result = obfuscate('company.name@test.com', {
   minimumNameObfuscationLength: 6,
 });
 expect(result).equal('com***y***me@***.com');
-
 ```
 
 ```js
@@ -128,7 +119,6 @@ const result = obfuscate('company.example@test.com', {
   minimumNameObfuscationLength: 6,
 });
 expect(result).equal('co***y.e***le@***.com');
-
 ```
 
 ```js
@@ -138,7 +128,6 @@ const result = obfuscate('company.name@test.com', {
   minimumNameObfuscationLength: 10,
 });
 expect(result).equal('co******@***.com');
-
 ```
 
 ```js
@@ -147,13 +136,11 @@ const result = obfuscate('company.name@test.com', {
   visibleCharactersEndLength: 4,
 });
 expect(result).equal('***pa***name@***.com');
-
 ```
 
 ```js
-const result = obfuscate('email.w```js
+const result = obfuscate('email.without@domain-extension');
 expect(result).equal('ema***wi***ut@***.***');
-
 ```
 
 ```js
@@ -163,14 +150,12 @@ const result = obfuscate('abcdefgh.ijklmno@domain.com', {
   visibleCharactersEndLength: 4,
 });
 expect(result).equal('abcd***gh.i***lmno@***.com');
-
 ```
 
 ```js
-const result = obfuscate('invalid value');
+const result = obfuscate('invalid email');
 expect(result).equal('*********@****.**');
 ```
-
 
 ```js
 const result = obfuscate(null, { invalidEmailValue: 'invalid email' });
