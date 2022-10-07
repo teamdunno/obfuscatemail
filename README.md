@@ -132,6 +132,11 @@ expect(result).equal('***mp***name@***.com');
 ```
 
 ```js
+const result = obfuscate('email.without@domain-extension');
+expect(result).equal('ema***.w***ut@***.***');
+```
+
+```js
 const result = obfuscate(undefined);
 expect(result).equal('*********@****.**');
 ```
@@ -157,6 +162,6 @@ expect(result).equal('*********@****.**');
 ```
 
 ```js
-const result = obfuscate('email.without@domain-extension');
-expect(result).equal('ema***.w***ut@***.***');
+const result = obfuscate(null, { invalidEmailValue: 'invalid email' });
+expect(result).equal('invalid email');
 ```
