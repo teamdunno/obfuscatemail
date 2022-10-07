@@ -7,11 +7,12 @@
 ![size](https://img.shields.io/bundlephobia/minzip/obfuscate-mail)
 ![downloads](https://img.shields.io/npm/dw/obfuscate-mail)
 
-```copy
-npm install obfuscate-mail
-```
+Email addresses should never been displayed by an api unless specifically requested by a recently authentified user.
 
-```copy
+This node.js library gives the options to obfuscate email addresses will leaving them partly identifiable by owners.
+
+```sh
+npm install obfuscate-mail
 yarn add obfuscate-mail
 ```
 
@@ -44,7 +45,6 @@ expect(result).equal('exa******@***.com');
 const result = obfuscate('example.example@example.com');
 expect(result).equal('exa***le***le@***.com');
 ```
-
 
 ```js
 const result = obfuscate('e@example.com');
