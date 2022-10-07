@@ -58,12 +58,12 @@ const obfuscateEmail = (email, options = DEFAULT_OPTIONS) => {
   );
 
   const middleCharacters =
-    visibleCharactersMiddleLength > 0 && charactersLeftToObfuscate > 0
+    visibleCharactersMiddleLength > 0
       ? name
-          .substring(visibleCharactersStartLength, charactersLeftToObfuscate)
+          .substring(visibleCharactersStartLength - 1)
           .substring(
-            charactersLeftToObfuscate - visibleCharactersMiddleLength,
-            visibleCharactersMiddleLength,
+            Math.round(charactersLeftToObfuscate / 2) -
+              Math.round(visibleCharactersMiddleLength / 2),
           )
           .substring(0, visibleCharactersMiddleLength)
       : '';
