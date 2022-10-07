@@ -9,7 +9,7 @@
 
 Email addresses should never been displayed by an api unless specifically requested by a recently authentified user.
 
-This node.js library gives the options to obfuscate email addresses will leaving them partly identifiable by owners.
+This node.js library gives the options to obfuscate email addresses will leaving them more or less identifiable.
 
 ```sh
 npm install obfuscate-mail
