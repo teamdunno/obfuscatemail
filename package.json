@@ -1,0 +1,39 @@
+{
+  "name": "obfuscate-mail",
+  "version": "1.0.0",
+  "description": "Obfuscate email",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rawpixel-vincent/obfuscate-email.git"
+  },
+  "keywords": [
+    "javascript",
+    "obfuscate",
+    "spam",
+    "email"
+  ],
+  "license": "CC0-1.0",
+  "author": {
+    "name": "Vincent Bar****t"
+  },
+  "bugs": {
+    "url": "https://github.com/rawpixel-vincent/obfuscate-email/issues"
+  },
+  "homepage": "https://github.com/rawpixel-vincent/obfuscate-email#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "mocha": "^10.0.0",
+    "prettier": "^2.7.1"
+  }
+}
