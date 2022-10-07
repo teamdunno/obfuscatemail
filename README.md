@@ -58,7 +58,6 @@ expect(result).equal('******@***.com');
 
 ```js
 const result = obfuscate('examp@example.com');
-
 expect(result).equal('e******@***.com');
 ```
 
