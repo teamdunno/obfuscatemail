@@ -129,4 +129,20 @@ describe('Obfuscate Email', () => {
 
     expect(result).equal('ema***.w***ut@***.***');
   });
+  it(`Unknown options should throw`, () => {
+    try {
+      obfuscate('', { badOption: 1 });
+    } catch (error) {
+      expect(error.message).equal('Unknown option: badOption');
+    }
+  });
+  it(`Invalid options should throw`, () => {
+    try {
+      obfuscate('', { minimumNameObfuscationLength: 'string' });
+    } catch (error) {
+      expect(error.message).equal(
+        'Option minimumNameObfuscationLength must be of type number',
+      );
+    }
+  });
 });
