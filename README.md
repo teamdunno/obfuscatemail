@@ -137,6 +137,13 @@ expect(result).equal('ema***.w***ut@***.***');
 ```
 
 ```js
+const result = obfuscate('example.company+test@example.com', {
+  asterisksLength: 12,
+});
+expect(result).equal('exa******le******st@*********.com');
+```
+
+```js
 const result = obfuscate(undefined);
 expect(result).equal('*********@****.**');
 ```

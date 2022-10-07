@@ -60,6 +60,13 @@ describe('Obfuscate Email', () => {
 
     expect(result).equal('exa******@example.com');
   });
+  it(`obfuscate('example.company+test@example.com') with showDomainName: true should return "exa******@example.com"`, () => {
+    const result = obfuscate('example.company+test@example.com', {
+      asterisksLength: 12,
+    });
+
+    expect(result).equal('exa******le******st@*********.com');
+  });
   it(`obfuscate('example@example.com') with showDomainName: true and showDomainExtension: false should return "exa******@example.***"`, () => {
     const result = obfuscate('example@example.com', {
       showDomainName: true,
