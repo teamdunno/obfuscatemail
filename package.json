@@ -4,7 +4,8 @@
   "description": "Obfuscate email",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coverage": "nyc --reporter=lcov npm test"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "mocha": "^10.0.0",
+    "nyc": "^15.1.0",
     "prettier": "^2.7.1"
   }
 }
