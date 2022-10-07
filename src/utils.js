@@ -21,7 +21,7 @@ function checkOptionValue(key, value) {
   return value;
 }
 
-module.exports.getOptions = (options = {}) => {
+module.exports.getOptions = (options) => {
   return Object.keys(DEFAULT_OPTIONS).reduce((acc, key) => {
     acc[key] = checkOptionValue(key, options[key]);
     return acc;
