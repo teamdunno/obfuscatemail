@@ -1,4 +1,10 @@
-# obfuscate email
+# obfuscate mail
+
+![Tests](https://github.com/rawpixel-vincent/obfuscate-mail/actions/workflows/node.js.yml/badge.svg)
+![license](https://img.shields.io/npm/l/obfuscate-mail)
+![npm](https://img.shields.io/npm/v/obfuscate-mail)
+![size](https://img.shields.io/bundlephobia/minzip/obfuscate-mail)
+![downloads](https://img.shields.io/npm/dw/obfuscate-mail)
 
 ```copy
 npm install obfuscate-mail
