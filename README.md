@@ -31,6 +31,7 @@ obfuscate('example@example.com');
 - `visibleCharactersEndLength` - default `2`
 - `showDomainName` - default `false`
 - `showDomainExtension` - default `true`
+- `invalidEmailValue` - default `*********@****.**`
 
 ## Examples
 
