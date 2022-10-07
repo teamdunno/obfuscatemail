@@ -13,21 +13,6 @@ const obfuscate = require('obfuscate-mail');
 
 obfuscate('example@example.com');
 // => exa******@***.com
-
-obfuscate('company.name@test.com', {
-  visibleCharactersStartLength: 3,
-  visibleCharactersEndLength: 2,
-  minimumNameObfuscationLength: 6,
-});
-// => com******me@***.com
-
-const result = obfuscate('company.name@test.com', {
-  asterisksLength: 8,
-  visibleCharactersStartLength: 2,
-  visibleCharactersEndLength: 3,
-  showDomainName: false,
-});
-// => co********ame@*****.com
 ```
 
 ## Options
@@ -35,28 +20,135 @@ const result = obfuscate('company.name@test.com', {
 - `asterisksLength` - default `6`
 - `minimumNameObfuscationLength` - default `4`
 - `visibleCharactersStartLength` - default `3`
+- `visibleCharactersMiddleLength` - default `2`
 - `visibleCharactersEndLength` - default `2`
 - `showDomainName` - default `false`
 - `showDomainExtension` - default `true`
 
-## Tests example
+## Examples
 
-```sh
-  Obfuscate Email
-    ✔ obfuscate('example@example.com') should return "exa******@***.com"
-    ✔ obfuscate('example.example@example.com') should return "exa******le@***.com"
-    ✔ obfuscate('e@example.com') should return "******@***.com"
-    ✔ obfuscate('exa@example.com') should return "******@***.com"
-    ✔ obfuscate('examp@example.com') should return "e******@***.com"
-    ✔ obfuscate('example@example.com') with showDomainName: true should return "exa******@example.com"
-    ✔ obfuscate('example@example.com') with showDomainName: true and showDomainExtension: false should return "exa******@example.***"
-    ✔ obfuscate('example@example.com') with options asterisksLength: 3, visibleCharactersStartLength: 2, visibleCharactersEndLength: 1, showDomainName: false, should return "ex***@***.com"
-    ✔ obfuscate('company.name@test.com') with options visibleCharactersStartLength: 4, visibleCharactersEndLength: 1, minimumNameObfuscationLength: 6 should return "comp******e@***.com"
-    ✔ obfuscate('company.name@test.com') with options visibleCharactersStartLength: 3, visibleCharactersEndLength: 2, minimumNameObfuscationLength: 6 should return "com******me@***.com"
-    ✔ obfuscate('company.name@test.com') with options visibleCharactersStartLength: 3, visibleCharactersEndLength: 2, minimumNameObfuscationLength: 10 should return "com******@***.com"
-    ✔ obfuscate('company.name@test.com') with options visibleCharactersStartLength: 0, visibleCharactersEndLength: 4 should return "******name@***.com"
-    ✔ obfuscate(undefined) should return "******@******"
-    ✔ obfuscate('') should return "******@******"
-    ✔ obfuscate(1234) should return "******@******"
-    ✔ obfuscate('random string') should return "******@******"
+```js
+const result = obfuscate('example@example.com');
+expect(result).equal('exa******@***.com');
+```
+
+```js
+const result = obfuscate('example.example@example.com');
+expect(result).equal('exa***le***le@***.com');
+```
+
+
+```js
+const result = obfuscate('e@example.com');
+expect(result).equal('******@***.com');
+```
+
+```js
+const result = obfuscate('exa@example.com');
+expect(result).equal('******@***.com');
+```
+
+```js
+const result = obfuscate('examp@example.com');
+expect(result).equal('e******@***.com');
+```
+
+```js
+const result = obfuscate('example@example.com', {
+  showDomainName: true,
+});
+expect(result).equal('exa******@example.com');
+```
+
+```js
+const result = obfuscate('example@example.com', {
+  showDomainName: true,
+  showDomainExtension: false,
+});
+expect(result).equal('exa******@example.***');
+```
+
+```js
+const result = obfuscate('company.name@test.com', {
+  asterisksLength: 8,
+  visibleCharactersStartLength: 2,
+  visibleCharactersEndLength: 3,
+  showDomainName: false,
+});
+expect(result).equal('co****an****ame@*****.com');
+```
+
+```js
+const result = obfuscate('company.name@test.com', {
+  visibleCharactersStartLength: 4,
+  visibleCharactersEndLength: 1,
+  minimumNameObfuscationLength: 6,
+});
+expect(result).equal('comp***n***e@***.com');
+```
+
+```js
+const result = obfuscate('company.name@test.com', {
+  visibleCharactersStartLength: 3,
+  visibleCharactersEndLength: 2,
+  minimumNameObfuscationLength: 6,
+});
+expect(result).equal('com***a***me@***.com');
+```
+
+```js
+const result = obfuscate('company.name@test.com', {
+  visibleCharactersStartLength: 2,
+  visibleCharactersMiddleLength: 3,
+  visibleCharactersEndLength: 2,
+  minimumNameObfuscationLength: 6,
+});
+expect(result).equal('co***an***me@***.com');
+```
+
+```js
+const result = obfuscate('company.name@test.com', {
+  visibleCharactersStartLength: 3,
+  visibleCharactersEndLength: 2,
+  minimumNameObfuscationLength: 10,
+});
+expect(result).equal('co******@***.com');
+```
+
+```js
+const result = obfuscate('company.name@test.com', {
+  visibleCharactersStartLength: 0,
+  visibleCharactersEndLength: 4,
+});
+expect(result).equal('***mp***name@***.com');
+```
+
+```js
+const result = obfuscate(undefined);
+expect(result).equal('*********@****.**');
+```
+
+```js
+const result = obfuscate('');
+expect(result).equal('*********@****.**');
+```
+
+```js
+const result = obfuscate(1234);
+expect(result).equal('*********@****.**');
+```
+
+```js
+const result = obfuscate('invalid email');
+expect(result).equal('*********@****.**');
+```
+
+```js
+const result = obfuscate('invalid@email@email.com');
+expect(result).equal('*********@****.**');
+```
+
+```js
+const result = obfuscate('email.without@domain-extension');
+expect(result).equal('ema***.w***ut@***.***');
 ```
