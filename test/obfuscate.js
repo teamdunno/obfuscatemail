@@ -124,6 +124,11 @@ describe('Obfuscate Email', () => {
 
     expect(result).equal('*********@****.**');
   });
+  it(`obfuscate(null) with options invalidEmailValue: 'invalid email' should return "invalid email"`, () => {
+    const result = obfuscate(null, { invalidEmailValue: 'invalid email' });
+
+    expect(result).equal('invalid email');
+  });
   it(`obfuscate('email.without@domain-extension') should return "ema***.w***ut@***.***"`, () => {
     const result = obfuscate('email.without@domain-extension');
 
