@@ -1,33 +1,57 @@
 const { expect } = require('chai');
 const { describe, it } = require('mocha');
 const obfuscate = require('../src');
+const { DEFAULT_OPTIONS } = require('../src/utils');
+
+const getObfuscatedCharactersCount = (clearEmail, obfuscatedEmail) => {
+  const visibleCharactersLength = obfuscatedEmail
+    .split('@')[0]
+    .split('')
+    .filter((c) => c !== '*').length;
+  return clearEmail.split('@')[0].length - visibleCharactersLength;
+};
 
 describe('Obfuscate Email', () => {
   it(`obfuscate('example@example.com') should return "exa******@***.com"`, () => {
     const result = obfuscate('example@example.com');
 
     expect(result).equal('exa******@***.com');
+    expect(
+      getObfuscatedCharactersCount('example@example.com', result),
+    ).greaterThanOrEqual(DEFAULT_OPTIONS.minimumNameObfuscationLength);
   });
   it(`obfuscate('example.example@example.com') should return "exa***le***le@***.com"`, () => {
     const result = obfuscate('example.example@example.com');
 
     expect(result).equal('exa***le***le@***.com');
+    expect(
+      getObfuscatedCharactersCount('example.example@example.com', result),
+    ).greaterThanOrEqual(DEFAULT_OPTIONS.minimumNameObfuscationLength);
   });
 
   it(`obfuscate('e@example.com') should return "******@***.com"`, () => {
     const result = obfuscate('e@example.com');
 
     expect(result).equal('******@***.com');
+    expect(
+      getObfuscatedCharactersCount('e@example.com', result),
+    ).greaterThanOrEqual(1);
   });
   it(`obfuscate('exa@example.com') should return "******@***.com"`, () => {
     const result = obfuscate('exa@example.com');
 
     expect(result).equal('******@***.com');
+    expect(
+      getObfuscatedCharactersCount('exa@example.com', result),
+    ).greaterThanOrEqual(3);
   });
   it(`obfuscate('examp@example.com') should return "e******@***.com"`, () => {
     const result = obfuscate('examp@example.com');
 
     expect(result).equal('e******@***.com');
+    expect(
+      getObfuscatedCharactersCount('examp@example.com', result),
+    ).greaterThanOrEqual(DEFAULT_OPTIONS.minimumNameObfuscationLength);
   });
   it(`obfuscate('example@example.com') with showDomainName: true should return "exa******@example.com"`, () => {
     const result = obfuscate('example@example.com', {
@@ -43,6 +67,9 @@ describe('Obfuscate Email', () => {
     });
 
     expect(result).equal('exa******@example.***');
+    expect(
+      getObfuscatedCharactersCount('example@example.com', result),
+    ).greaterThanOrEqual(DEFAULT_OPTIONS.minimumNameObfuscationLength);
   });
   it(`obfuscate('company.name@test.com') with options asterisksLength: 8, visibleCharactersStartLength: 2, visibleCharactersEndLength: 3, showDomainName: false, should return "co****an****ame@*****.com"`, () => {
     const result = obfuscate('company.name@test.com', {
@@ -53,6 +80,9 @@ describe('Obfuscate Email', () => {
     });
 
     expect(result).equal('co****an****ame@*****.com');
+    expect(
+      getObfuscatedCharactersCount('company.name@test.com', result),
+    ).greaterThanOrEqual(DEFAULT_OPTIONS.minimumNameObfuscationLength);
   });
   it(`obfuscate('company.name@test.com') with options visibleCharactersStartLength: 4, visibleCharactersEndLength: 1, minimumNameObfuscationLength: 6 should return "comp***n***e@***.com"`, () => {
     const result = obfuscate('company.name@test.com', {
@@ -62,6 +92,9 @@ describe('Obfuscate Email', () => {
     });
 
     expect(result).equal('comp***n***e@***.com');
+    expect(
+      getObfuscatedCharactersCount('company.name@test.com', result),
+    ).greaterThanOrEqual(6);
   });
   it(`obfuscate('company.name@test.com') with options visibleCharactersStartLength: 3, visibleCharactersEndLength: 2, minimumNameObfuscationLength: 6 should return "com***a***me@***.com"`, () => {
     const result = obfuscate('company.name@test.com', {
@@ -71,6 +104,9 @@ describe('Obfuscate Email', () => {
     });
 
     expect(result).equal('com***a***me@***.com');
+    expect(
+      getObfuscatedCharactersCount('company.name@test.com', result),
+    ).greaterThanOrEqual(6);
   });
   it(`obfuscate('company.example@test.com') with options visibleCharactersStartLength: 2, visibleCharactersMiddleLength: 3, visibleCharactersEndLength: 2, minimumNameObfuscationLength: 6 should return "co***an***me@***.com"`, () => {
     const result = obfuscate('company.name@test.com', {
@@ -81,6 +117,9 @@ describe('Obfuscate Email', () => {
     });
 
     expect(result).equal('co***an***me@***.com');
+    expect(
+      getObfuscatedCharactersCount('company.name@test.com', result),
+    ).greaterThanOrEqual(6);
   });
   it(`obfuscate('company.name@test.com') with options visibleCharactersStartLength: 3, visibleCharactersEndLength: 2, minimumNameObfuscationLength: 10 should return "com******@***.com"`, () => {
     const result = obfuscate('company.name@test.com', {
@@ -90,6 +129,9 @@ describe('Obfuscate Email', () => {
     });
 
     expect(result).equal('co******@***.com');
+    expect(
+      getObfuscatedCharactersCount('company.name@test.com', result),
+    ).greaterThanOrEqual(10);
   });
   it(`obfuscate('company.name@test.com') with options visibleCharactersStartLength: 0, visibleCharactersEndLength: 4 should return "***mp***name@***.com"`, () => {
     const result = obfuscate('company.name@test.com', {
@@ -98,6 +140,9 @@ describe('Obfuscate Email', () => {
     });
 
     expect(result).equal('***mp***name@***.com');
+    expect(
+      getObfuscatedCharactersCount('company.name@test.com', result),
+    ).greaterThanOrEqual(DEFAULT_OPTIONS.minimumNameObfuscationLength);
   });
   it(`obfuscate(undefined) should return "*********@****.**"`, () => {
     const result = obfuscate(undefined);
@@ -133,6 +178,9 @@ describe('Obfuscate Email', () => {
     const result = obfuscate('email.without@domain-extension');
 
     expect(result).equal('ema***.w***ut@***.***');
+    expect(
+      getObfuscatedCharactersCount('email.without@domain-extension', result),
+    ).greaterThanOrEqual(DEFAULT_OPTIONS.minimumNameObfuscationLength);
   });
   it(`Unknown options should not throw`, () => {
     let error = null;
