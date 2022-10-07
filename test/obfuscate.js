@@ -44,15 +44,15 @@ describe('Obfuscate Email', () => {
 
     expect(result).equal('exa******@example.***');
   });
-  it(`obfuscate('example@example.com') with options asterisksLength: 3, visibleCharactersStartLength: 2, visibleCharactersEndLength: 1, showDomainName: false, should return "ex***@***.com"`, () => {
-    const result = obfuscate('example@example.com', {
-      asterisksLength: 3,
+  it(`obfuscate('company.name@test.com') with options asterisksLength: 8, visibleCharactersStartLength: 2, visibleCharactersEndLength: 3, showDomainName: false, should return "co********ame@*****.com"`, () => {
+    const result = obfuscate('company.name@test.com', {
+      asterisksLength: 8,
       visibleCharactersStartLength: 2,
-      visibleCharactersEndLength: 1,
+      visibleCharactersEndLength: 3,
       showDomainName: false,
     });
 
-    expect(result).equal('ex***e@***.com');
+    expect(result).equal('co********ame@*****.com');
   });
   it(`obfuscate('company.name@test.com') with options visibleCharactersStartLength: 4, visibleCharactersEndLength: 1, minimumNameObfuscationLength: 6 should return "comp******e@***.com"`, () => {
     const result = obfuscate('company.name@test.com', {

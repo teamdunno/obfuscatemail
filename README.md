@@ -12,7 +12,22 @@ yarn add obfuscate-mail
 const obfuscate = require('obfuscate-mail');
 
 obfuscate('example@example.com');
-// => exa*******@****.***
+// => exa******@***.com
+
+obfuscate('company.name@test.com', {
+  visibleCharactersStartLength: 3,
+  visibleCharactersEndLength: 2,
+  minimumNameObfuscationLength: 6,
+});
+// => com******me@***.com
+
+const result = obfuscate('company.name@test.com', {
+  asterisksLength: 8,
+  visibleCharactersStartLength: 2,
+  visibleCharactersEndLength: 3,
+  showDomainName: false,
+});
+// => co********ame@*****.com
 ```
 
 ## Options
