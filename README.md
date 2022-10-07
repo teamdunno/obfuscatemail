@@ -4,8 +4,6 @@
 ![Tests](https://github.com/rawpixel-vincent/obfuscate-mail/actions/workflows/node.js.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/rawpixel-vincent/obfuscate-mail/badge.svg)](https://coveralls.io/github/rawpixel-vincent/obfuscate-mail?branch=main)
 ![license](https://img.shields.io/npm/l/obfuscate-mail)
-![size](https://img.shields.io/bundlephobia/min/obfuscate-mail)
-![downloads](https://img.shields.io/npm/dw/obfuscate-mail)
 
 Email addresses should never been displayed by an api unless specifically requested by a recently authentified user.
 
