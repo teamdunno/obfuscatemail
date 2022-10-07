@@ -1,5 +1,12 @@
 const { getOptions, DEFAULT_OPTIONS } = require('./utils');
 
+/**
+ * Obfuscate an email.
+ * @param {any} email
+ * @param {import('./utils').Options} [options]
+ * @returns {string}
+ * @throws {Error} if an option type is invalid.
+ */
 const obfuscateEmail = (email, options = DEFAULT_OPTIONS) => {
   const opts = getOptions(options);
 
@@ -58,12 +65,12 @@ const obfuscateEmail = (email, options = DEFAULT_OPTIONS) => {
   );
 
   const middleCharacters =
-    visibleCharactersMiddleLength > 0 && charactersLeftToObfuscate > 0
+    visibleCharactersMiddleLength > 0
       ? name
-          .substring(visibleCharactersStartLength, charactersLeftToObfuscate)
+          .substring(visibleCharactersStartLength - 1)
           .substring(
-            charactersLeftToObfuscate - visibleCharactersMiddleLength,
-            visibleCharactersMiddleLength,
+            Math.round(charactersLeftToObfuscate / 2) -
+              Math.round(visibleCharactersMiddleLength / 2),
           )
           .substring(0, visibleCharactersMiddleLength)
       : '';
