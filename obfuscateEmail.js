@@ -1,5 +1,12 @@
 const { getOptions, DEFAULT_OPTIONS } = require('./utils');
 
+/**
+ * Obfuscate an email.
+ * @param {any} email
+ * @param {import('./utils').Options} [options]
+ * @returns {string}
+ * @throws {Error} if an option type is invalid.
+ */
 const obfuscateEmail = (email, options = DEFAULT_OPTIONS) => {
   const opts = getOptions(options);
 

@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { describe, it } = require('mocha');
-const obfuscate = require('../src');
-const { DEFAULT_OPTIONS } = require('../src/utils');
+const obfuscate = require('../obfuscateEmail');
+const { DEFAULT_OPTIONS } = require('../utils');
 
 const getObfuscatedCharactersCount = (clearEmail, obfuscatedEmail) => {
   const visibleCharactersLength = obfuscatedEmail

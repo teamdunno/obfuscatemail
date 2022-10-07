@@ -1,3 +1,18 @@
+/**
+ * @typedef {Object} Options
+ * @property {number} [asterisksLength=6]
+ * @property {number} [minimumNameObfuscationLength=4]
+ * @property {number} [visibleCharactersStartLength=3]
+ * @property {number} [visibleCharactersMiddleLength=2]
+ * @property {number} [visibleCharactersEndLength=2]
+ * @property {boolean} [showDomainName=false]
+ * @property {boolean} [showDomainExtension=true]
+ * @property {string} [invalidEmailValue="*********@****.**"]
+ */
+
+/**
+ * @type {Options}
+ */
 const DEFAULT_OPTIONS = {
   asterisksLength: 6,
   minimumNameObfuscationLength: 4,
@@ -9,6 +24,12 @@ const DEFAULT_OPTIONS = {
   invalidEmailValue: '*********@****.**',
 };
 
+/**
+ * @param {string} key
+ * @param {any} value
+ * @returns {Options}
+ * @throws {Error}
+ */
 function checkOptionValue(key, value) {
   if (value === undefined) {
     return DEFAULT_OPTIONS[key];
@@ -21,6 +42,10 @@ function checkOptionValue(key, value) {
   return value;
 }
 
+/**
+ * @param {Object} options
+ * @returns {Options}
+ */
 module.exports.getOptions = (options) => {
   return Object.keys(DEFAULT_OPTIONS).reduce((acc, key) => {
     acc[key] = checkOptionValue(key, options[key]);
