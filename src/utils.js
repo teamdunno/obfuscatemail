@@ -2,9 +2,11 @@ const DEFAULT_OPTIONS = {
   asterisksLength: 6,
   minimumNameObfuscationLength: 4,
   visibleCharactersStartLength: 3,
+  visibleCharactersMiddleLength: 2,
   visibleCharactersEndLength: 2,
   showDomainName: false,
   showDomainExtension: true,
+  invalidEmailValue: '*********@****.**',
 };
 
 function checkOptionValue(key, value) {

@@ -3,17 +3,20 @@ const { getOptions, DEFAULT_OPTIONS } = require('./utils');
 const obfuscateEmail = (email, options = DEFAULT_OPTIONS) => {
   const opts = getOptions(options);
 
-  if (typeof email !== 'string' || email.length === 0 || !email.includes('@')) {
-    return `${'*'.repeat(opts.asterisksLength)}@${'*'.repeat(
-      opts.asterisksLength,
-    )}`;
+  if (
+    typeof email !== 'string' ||
+    email.length === 0 ||
+    !email.includes('@') ||
+    email.split('@').length !== 2
+  ) {
+    return opts.invalidEmailValue;
   }
 
   const [name, domain] = email.split('@');
   const [domainName, domainExtension = '***'] = domain.split('.');
 
   const visibleCharactersStartLength =
-    name.length > 1
+    opts.visibleCharactersStartLength > 0 && name.length > 1
       ? Math.min(
           name.length - opts.minimumNameObfuscationLength > 0
             ? name.length - opts.minimumNameObfuscationLength
@@ -23,8 +26,9 @@ const obfuscateEmail = (email, options = DEFAULT_OPTIONS) => {
       : 0;
 
   const visibleCharactersEndLength =
+    opts.visibleCharactersEndLength > 0 &&
     name.length >
-    visibleCharactersStartLength + opts.minimumNameObfuscationLength
+      visibleCharactersStartLength + opts.minimumNameObfuscationLength
       ? Math.min(
           name.length -
             visibleCharactersStartLength -
@@ -32,9 +36,42 @@ const obfuscateEmail = (email, options = DEFAULT_OPTIONS) => {
           opts.visibleCharactersEndLength,
         )
       : 0;
+  const visibleCharactersMiddleLength =
+    opts.visibleCharactersMiddleLength > 0 &&
+    name.length -
+      visibleCharactersStartLength -
+      visibleCharactersEndLength -
+      opts.minimumNameObfuscationLength >
+      0
+      ? Math.min(
+          name.length -
+            visibleCharactersStartLength -
+            visibleCharactersEndLength -
+            opts.minimumNameObfuscationLength,
+          opts.visibleCharactersMiddleLength,
+        )
+      : 0;
+
+  const charactersLeftToObfuscate = Math.max(
+    0,
+    name.length - visibleCharactersStartLength - visibleCharactersEndLength,
+  );
+
+  const middleCharacters =
+    visibleCharactersMiddleLength > 0 && charactersLeftToObfuscate > 0
+      ? name
+          .substring(visibleCharactersStartLength, charactersLeftToObfuscate)
+          .substring(
+            charactersLeftToObfuscate - visibleCharactersMiddleLength,
+            visibleCharactersMiddleLength,
+          )
+          .substring(0, visibleCharactersMiddleLength)
+      : '';
 
   return `${name.substring(0, visibleCharactersStartLength)}${'*'.repeat(
-    opts.asterisksLength,
+    Math.max(1, Math.floor(opts.asterisksLength / 2)),
+  )}${middleCharacters}${'*'.repeat(
+    Math.max(1, Math.floor(opts.asterisksLength / 2)),
   )}${
     visibleCharactersEndLength > 0
       ? name.substring(name.length - visibleCharactersEndLength)
