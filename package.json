@@ -3,7 +3,6 @@
   "version": "1.4.0",
   "description": "Obfuscate email",
   "main": "dist/bundle.js",
-  "types": "dist/types.d.ts",
   "scripts": {
     "test": "npm run test:source",
     "test:bundle": "cp test/obfuscate.js test/obfuscate.bundle.js && echo 'const obfuscate = require(\"../dist/bundle\");const { DEFAULT_OPTIONS } = require(\"../dist/bundle\");' | cat - test/obfuscate.bundle.js > temp && mv temp test/obfuscate.bundle.js && mocha test/obfuscate.bundle.js && rm test/obfuscate.bundle.js",

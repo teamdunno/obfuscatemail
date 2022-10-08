@@ -7,7 +7,7 @@
     "skipLibCheck": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outFile": "./dist/types.d.ts",
+    "outFile": "index.d.ts",
     "moduleResolution": "node",
     "noStrictGenericChecks": true
   },
