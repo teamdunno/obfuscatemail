@@ -1,0 +1,100 @@
+name: wasm
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "dist/wasm.js"
+      - ".github/workflows/wasm.yml"
+  pull_request:
+    paths:
+      - "dist/wasm.js"
+      - ".github/workflows/wasm.yml"
+
+jobs:
+  checks:
+    name: Build wasm bundle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.12
+
+      - name: Download javy
+        env:
+          JAVY_VERSION: 0.3.0
+        run: |
+          echo "$(pwd)"
+          wget -nv 'https://github.com/Shopify/javy/archive/refs/tags/v${{ env.JAVY_VERSION }}.tar.gz' -O /tmp/javy.tar.gz
+          tar -xf /tmp/javy.tar.gz -C /tmp
+          mv /tmp/javy-${{ env.JAVY_VERSION }} /tmp/javy
+          cd /tmp/javy
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: default
+          toolchain: stable
+          default: true
+          components: clippy, rustfmt
+
+      - name: Cargo Cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('/tmp/javy/Cargo.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-${{ hashFiles('/tmp/javy/Cargo.toml') }}
+            ${{ runner.os }}-cargo
+
+      - name: Cargo Target Cache
+        uses: actions/cache@v1
+        with:
+          path: /tmp/javy/target
+          key: ${{ runner.os }}-cargo-target-${{ hashFiles('/tmp/javy/Cargo.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-target-${{ hashFiles('/tmp/javy/Cargo.toml') }}
+            ${{ runner.os }}-cargo-target
+
+      - name: Install wasmtime-cli
+        env:
+          WASMTIME_VERSION: 0.34.1
+        run: |
+          wget -nv 'https://github.com/bytecodealliance/wasmtime/releases/download/v${{ env.WASMTIME_VERSION }}/wasmtime-v${{ env.WASMTIME_VERSION }}-x86_64-linux.tar.xz' -O /tmp/wasmtime.tar.xz
+          mkdir /tmp/wasmtime
+          tar xvf /tmp/wasmtime.tar.xz --strip-components=1 -C /tmp/wasmtime
+          echo "/tmp/wasmtime" >> $GITHUB_PATH
+
+      - name: Install javy
+        env:
+          JAVY_VERSION: 0.3.0
+        run: |
+          cd /tmp/javy
+          rustup target add wasm32-wasi
+          cargo install cargo-wasi
+          make download-wasi-sdk
+          make
+          ls -al /tmp/javy/target/release
+          echo "/tmp/javy/target/release" >> $GITHUB_PATH
+
+      - name: Build wasm
+        run: |
+          cd /home/runner/work/obfuscate-mail/obfuscate-mail
+          rm -f dist/bundle.wasm
+          javy dist/wasm.js -o dist/bundle.wasm
+
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$(if [ -n "$(git status --porcelain)" ]; then echo "true"; else echo "false"; fi)
+
+      - name: Update bundle.wasm in GitHub repository
+        if: steps.git-check.outputs.modified == 'true'
+        run:  |
+          git config --global user.name 'rawpixel-vincent'
+          git config --global user.email 'rawpixel.vincent@gmail.com'
+          git add dist/bundle.wasm
+          git commit -m 'update bundle.wasm'
+          git push
