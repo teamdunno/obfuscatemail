@@ -201,4 +201,25 @@ describe('Obfuscate Email', () => {
     const result = obfuscate(null, { invalidEmailValue: 'invalid email' });
     expect(result).equal('invalid email');
   });
+  it(`obfuscate 1000 naugthy email without throwing`, async () => {
+    const json = await require('fs/promises').readFile(
+      './test/data/email_data.json',
+    );
+    const emails = JSON.parse(json);
+    emails.forEach(({ email }) => {
+      const result = obfuscate(email);
+      expect(result.length).greaterThan(0);
+      if (email) {
+        expect(
+          getObfuscatedCharactersCount(email, result),
+          `${email}: ${result}`,
+        ).greaterThanOrEqual(
+          email.split('@')[0].length <
+            DEFAULT_OPTIONS.minimumNameObfuscationLength
+            ? email.split('@')[0].length
+            : DEFAULT_OPTIONS.minimumNameObfuscationLength,
+        );
+      }
+    });
+  });
 });

@@ -67,3 +67,7 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
+
+# Tests generated files
+test/*.source.js
+test/*.bundle.js
