@@ -3,6 +3,24 @@
   "version": "1.4.1",
   "description": "Obfuscate email",
   "main": "dist/bundle.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/bundle.js",
+      "types": "./index.d.ts"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "index.d.ts"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "module": "dist/bundle.js",
   "scripts": {
     "test": "npm run test:source",
     "test:bundle": "cp test/obfuscate.js test/obfuscate.bundle.js && echo 'const obfuscate = require(\"../dist/bundle\");const { DEFAULT_OPTIONS } = require(\"../dist/bundle\");' | cat - test/obfuscate.bundle.js > temp && mv temp test/obfuscate.bundle.js && mocha test/obfuscate.bundle.js && rm test/obfuscate.bundle.js",
