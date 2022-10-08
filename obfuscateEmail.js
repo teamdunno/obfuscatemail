@@ -2,8 +2,8 @@ const { getOptions, DEFAULT_OPTIONS } = require('./utils');
 
 /**
  * Obfuscate an email.
- * @param {any} email
- * @param {import('./utils').Options} [options]
+ * @param {string} email
+ * @param {import('./utils').Options} [options=DEFAULT_OPTIONS]
  * @returns {string}
  * @throws {Error} if an option type is invalid.
  */
@@ -43,6 +43,7 @@ const obfuscateEmail = (email, options = DEFAULT_OPTIONS) => {
           opts.visibleCharactersEndLength,
         )
       : 0;
+
   const visibleCharactersMiddleLength =
     opts.visibleCharactersMiddleLength > 0 &&
     name.length -
@@ -92,3 +93,4 @@ const obfuscateEmail = (email, options = DEFAULT_OPTIONS) => {
 };
 
 module.exports = obfuscateEmail;
+module.exports.DEFAULT_OPTIONS = DEFAULT_OPTIONS;

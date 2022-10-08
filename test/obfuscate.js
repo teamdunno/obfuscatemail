@@ -1,7 +1,5 @@
 const { expect } = require('chai');
 const { describe, it } = require('mocha');
-const obfuscate = require('../obfuscateEmail');
-const { DEFAULT_OPTIONS } = require('../utils');
 
 const getObfuscatedCharactersCount = (clearEmail, obfuscatedEmail) => {
   const visibleCharactersLength = obfuscatedEmail
@@ -161,6 +159,7 @@ describe('Obfuscate Email', () => {
   it(`Unknown options should not throw`, () => {
     let error = null;
     try {
+      // @ts-ignore
       obfuscate('', { badOption: 1 });
     } catch (e) {
       error = e;
@@ -169,6 +168,7 @@ describe('Obfuscate Email', () => {
   });
   it(`Invalid options should throw`, () => {
     try {
+      // @ts-ignore
       obfuscate('', { minimumNameObfuscationLength: 'string' });
     } catch (error) {
       expect(error.message).equal(
@@ -185,6 +185,7 @@ describe('Obfuscate Email', () => {
     expect(result).equal('*********@****.**');
   });
   it(`obfuscate(1234) should return "*********@****.**"`, () => {
+    // @ts-ignore
     const result = obfuscate(1234);
     expect(result).equal('*********@****.**');
   });

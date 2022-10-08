@@ -11,6 +11,9 @@
  */
 
 /**
+ * @typedef {[keyof Options]} OptionsKeys
+
+/**
  * @type {Options}
  */
 const DEFAULT_OPTIONS = {
@@ -43,7 +46,7 @@ function checkOptionValue(key, value) {
 }
 
 /**
- * @param {Object} options
+ * @param {Options} options
  * @returns {Options}
  */
 module.exports.getOptions = (options) => {

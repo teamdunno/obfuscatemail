@@ -2,10 +2,18 @@
   "name": "obfuscate-mail",
   "version": "1.3.0",
   "description": "Obfuscate email",
-  "main": "obfuscateEmail.js",
+  "main": "dist/bundle.js",
+  "types": "dist/types.d.ts",
   "scripts": {
-    "test": "mocha",
-    "coverage": "nyc --reporter=lcov npm test"
+    "test": "npm run test:source",
+    "test:bundle": "cp test/obfuscate.js test/obfuscate.bundle.js && echo 'const obfuscate = require(\"../dist/bundle\");const { DEFAULT_OPTIONS } = require(\"../dist/bundle\");' | cat - test/obfuscate.bundle.js > temp && mv temp test/obfuscate.bundle.js && mocha test/obfuscate.bundle.js && rm test/obfuscate.bundle.js",
+    "test:source": "cp test/obfuscate.js test/obfuscate.source.js && echo 'const obfuscate = require(\"../obfuscateEmail\");const { DEFAULT_OPTIONS } = require(\"../utils\");' | cat - test/obfuscate.source.js > temp && mv temp test/obfuscate.source.js && mocha test/obfuscate.source.js && rm test/obfuscate.source.js",
+    "build": "npm run types:emit && npm run bundle",
+    "bundle": "rm -f dist/bundle.js && mkdir -p dist && browserify --standalone obfuscateEmail --node --ignore-missing obfuscateEmail.js | terser > ./dist/bundle.js",
+    "types:emit": "tsc --allowJs --removeComments",
+    "coverage": "nyc --reporter=lcov npm run test:source",
+    "prepare": "husky install",
+    "precommit": "npm run build && npm run test:bundle && git add dist/."
   },
   "repository": {
     "type": "git",
@@ -25,8 +33,8 @@
     "url": "https://github.com/rawpixel-vincent/obfuscate-email/issues"
   },
   "homepage": "https://github.com/rawpixel-vincent/obfuscate-email#readme",
-  "dependencies": {},
   "devDependencies": {
+    "browserify": "^17.0.0",
     "chai": "^4.3.6",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",
@@ -34,8 +42,11 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
+    "husky": "^8.0.1",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "terser": "^5.15.1",
+    "typescript": "^4.8.4"
   }
 }

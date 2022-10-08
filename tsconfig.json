@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "es2021",
+    "lib": ["es2021"],
+    "checkJs": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outFile": "./dist/types.d.ts",
+    "moduleResolution": "node",
+    "noStrictGenericChecks": true
+  },
+  "include": ["*.js"],
+  "exclude": ["*.d.ts", "node_modules"]
+}
