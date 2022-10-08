@@ -26,9 +26,18 @@ import obfuscate from 'obfuscate-mail';
 ```
 
 ```js
-obfuscate('example@example.com');
+obfuscate('example.example@example.com', {
+  // asterisksLength: 6,
+  // minimumNameObfuscationLength: 4,
+  // visibleCharactersStartLength: 3,
+  // visibleCharactersMiddleLength: 2,
+  // visibleCharactersEndLength: 2,
+  // showDomainName: false,
+  // showDomainExtension: true,
+  // invalidEmailValue: '*********@****.**',
+});
 ```
->// => exa******@***.com
+> `=> exa***.e***le@***.com`
 
 ## Options
 
