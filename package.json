@@ -1,6 +1,6 @@
 {
   "name": "obfuscate-mail",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Obfuscate email",
   "main": "dist/bundle.js",
   "types": "dist/types.d.ts",
