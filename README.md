@@ -11,11 +11,21 @@ This node.js library gives the options to obfuscate email addresses will leaving
 
 ```sh
 npm install obfuscate-mail
+```
+```sh
 yarn add obfuscate-mail
 ```
 
 ```js
 const obfuscate = require('obfuscate-mail');
+
+obfuscate('example@example.com');
+// => exa******@***.com
+```
+
+
+```js
+import obfuscate from 'obfuscate-mail';
 
 obfuscate('example@example.com');
 // => exa******@***.com
