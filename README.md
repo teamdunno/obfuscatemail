@@ -58,7 +58,7 @@ obfuscate('example.example@example.com', {
 
 ```sh
 curl -o bundle.wasm https://raw.githubusercontent.com/rawpixel-vincent/obfuscate-mail/main/dist/bundle.wasm
-echo '{ "email": "asdas.sddas@dsdasd.gr", "options": {} }' | wasmtime bundle.wasm
+echo '{ "email": "example.example@example.com", "options": {} }' | wasmtime bundle.wasm
 ```
 
 > `=> "exa***.e***le@***.com"%`
