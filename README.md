@@ -38,6 +38,7 @@ obfuscate('example.example@example.com', {
   // invalidEmailValue: '*********@****.**',
 });
 ```
+
 > `=> exa***.e***le@***.com`
 
 ## Options
