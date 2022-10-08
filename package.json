@@ -1,6 +1,6 @@
 {
   "name": "obfuscate-mail",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Obfuscate email",
   "main": "obfuscateEmail.js",
   "types": "obfuscateEmail.d.ts",
