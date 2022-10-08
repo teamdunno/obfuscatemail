@@ -24,8 +24,9 @@
     "test": "npm run test:source",
     "test:bundle": "cp test/obfuscate.js test/obfuscate.bundle.js && echo 'const obfuscate = require(\"../dist/bundle\");const { DEFAULT_OPTIONS } = require(\"../dist/bundle\");' | cat - test/obfuscate.bundle.js > temp && mv temp test/obfuscate.bundle.js && mocha test/obfuscate.bundle.js && rm test/obfuscate.bundle.js",
     "test:source": "cp test/obfuscate.js test/obfuscate.source.js && echo 'const obfuscate = require(\"../obfuscateEmail\");const { DEFAULT_OPTIONS } = require(\"../utils\");' | cat - test/obfuscate.source.js > temp && mv temp test/obfuscate.source.js && mocha test/obfuscate.source.js && rm test/obfuscate.source.js",
-    "build": "npm run types:emit && npm run bundle && npm run build:esm",
+    "build": "npm run types:emit && npm run bundle && npm run build:esm && npm run build:wasm",
     "build:esm": "npx gen-esm-wrapper dist/bundle.js dist/bundle.mjs",
+    "build:wasm": "rm -f dist/wasm.js && mkdir -p dist && esbuild --bundle --platform=node wasm.js --outfile=dist/wasm.js",
     "bundle": "rm -f dist/bundle.js && mkdir -p dist && browserify --standalone obfuscateEmail --node --ignore-missing obfuscateEmail.js | terser > ./dist/bundle.js",
     "types:emit": "tsc --allowJs --removeComments",
     "coverage": "nyc --reporter=lcov npm run test:source",
@@ -53,6 +54,7 @@
   "devDependencies": {
     "browserify": "^17.0.0",
     "chai": "^4.3.6",
+    "esbuild": "^0.15.10",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",

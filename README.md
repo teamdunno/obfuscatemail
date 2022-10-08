@@ -52,6 +52,14 @@ obfuscate('example.example@example.com', {
 - `showDomainExtension` - default `true`
 - `invalidEmailValue` - default `*********@****.**`
 
+## Web assembly bundle
+
+```sh
+echo '{ "email": "asdas.sddas@dsdasd.gr", "options": {} }' | wasmtime dist/bundle.wasm
+```
+
+> `=> "exa***.e***le@***.com"%`
+
 ## [Test it with runKit](https://runkit.com/rawpixel-vincent/obfuscate-email)
 
 ## Examples
