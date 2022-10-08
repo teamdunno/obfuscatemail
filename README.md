@@ -55,7 +55,8 @@ obfuscate('example.example@example.com', {
 ## Web assembly bundle
 
 ```sh
-echo '{ "email": "asdas.sddas@dsdasd.gr", "options": {} }' | wasmtime dist/bundle.wasm
+curl -o bundle.wasm https://raw.githubusercontent.com/rawpixel-vincent/obfuscate-mail/main/dist/bundle.wasm
+echo '{ "email": "asdas.sddas@dsdasd.gr", "options": {} }' | wasmtime bundle.wasm
 ```
 
 > `=> "exa***.e***le@***.com"%`
