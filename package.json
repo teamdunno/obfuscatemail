@@ -2,30 +2,30 @@
   "name": "obfuscate-mail",
   "version": "1.4.2",
   "description": "Obfuscate email",
-  "main": "dist/bundle.js",
-  "types": "index.d.ts",
+  "main": "obfuscateEmail.js",
+  "types": "obfuscateEmail.d.ts",
   "exports": {
     ".": {
       "require": "./dist/bundle.js",
-      "types": "./index.d.ts"
+      "import": "./dist/bundle.mjs"
     }
   },
   "typesVersions": {
     "*": {
       ".": [
-        "index.d.ts"
+        "obfuscateEmail.d.ts"
       ]
     }
   },
   "engines": {
     "node": ">=14"
   },
-  "module": "dist/bundle.js",
   "scripts": {
     "test": "npm run test:source",
     "test:bundle": "cp test/obfuscate.js test/obfuscate.bundle.js && echo 'const obfuscate = require(\"../dist/bundle\");const { DEFAULT_OPTIONS } = require(\"../dist/bundle\");' | cat - test/obfuscate.bundle.js > temp && mv temp test/obfuscate.bundle.js && mocha test/obfuscate.bundle.js && rm test/obfuscate.bundle.js",
     "test:source": "cp test/obfuscate.js test/obfuscate.source.js && echo 'const obfuscate = require(\"../obfuscateEmail\");const { DEFAULT_OPTIONS } = require(\"../utils\");' | cat - test/obfuscate.source.js > temp && mv temp test/obfuscate.source.js && mocha test/obfuscate.source.js && rm test/obfuscate.source.js",
-    "build": "npm run types:emit && npm run bundle",
+    "build": "npm run types:emit && npm run bundle && npm run build:esm",
+    "build:esm": "npx gen-esm-wrapper dist/bundle.js dist/bundle.mjs",
     "bundle": "rm -f dist/bundle.js && mkdir -p dist && browserify --standalone obfuscateEmail --node --ignore-missing obfuscateEmail.js | terser > ./dist/bundle.js",
     "types:emit": "tsc --allowJs --removeComments",
     "coverage": "nyc --reporter=lcov npm run test:source",
