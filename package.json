@@ -27,11 +27,19 @@
     "build": "npm run types:emit && npm run bundle && npm run build:esm && npm run build:wasm",
     "build:esm": "npx gen-esm-wrapper dist/bundle.js dist/bundle.mjs",
     "build:wasm": "rm -f dist/wasm.js && mkdir -p dist && esbuild --bundle --platform=node wasm.js --outfile=dist/wasm.js",
-    "bundle": "rm -f dist/bundle.js && mkdir -p dist && browserify --standalone obfuscateEmail --node --ignore-missing obfuscateEmail.js | terser > ./dist/bundle.js",
+    "bundle": "rm -f dist/bundle.js && mkdir -p dist && esbuild --bundle --platform=node obfuscateEmail.js --outfile=dist/bundle.js && terser dist/bundle.js --compress --mangle --output dist/bundle.js",
     "types:emit": "tsc --allowJs --removeComments",
     "coverage": "nyc --reporter=lcov npm run test:source",
     "prepare": "husky install",
-    "precommit": "npm run build && npm run test:bundle && git add dist/."
+    "precommit": "lint-staged && npm run build && npm run test:bundle && git add dist/.",
+    "prettier": "prettier --write \"./*.js\"",
+    "lint": "eslint \"./*.js\" --fix"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "eslint *.js --fix"
+    ]
   },
   "repository": {
     "type": "git",
@@ -52,16 +60,16 @@
   },
   "homepage": "https://github.com/rawpixel-vincent/obfuscate-email#readme",
   "devDependencies": {
-    "browserify": "^17.0.0",
     "chai": "^4.3.6",
     "esbuild": "^0.15.10",
-    "eslint": "^8.0.1",
+    "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.3.0",
+    "eslint-plugin-promise": "^6.0.1",
     "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0",
     "prettier": "^2.7.1",
