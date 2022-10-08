@@ -42,7 +42,7 @@ obfuscate('example@example.com');
 - `showDomainExtension` - default `true`
 - `invalidEmailValue` - default `*********@****.**`
 
-## [Test it](https://runkit.com/rawpixel-vincent/obfuscate-email)
+## [Test it with runKit](https://runkit.com/rawpixel-vincent/obfuscate-email)
 
 ## Examples
 
