@@ -57,7 +57,7 @@ obfuscate('example.example@example.com', {
 ## Web assembly binary (WASI-compatible)
 
 ```sh
-curl -o bundle.wasm https://raw.githubusercontent.com/rawpixel-vincent/obfuscate-mail/main/dist/obfuscate.wasm
+curl -o obfuscate.wasm https://raw.githubusercontent.com/rawpixel-vincent/obfuscate-mail/main/dist/bundle.wasm
 echo '{ "email": "example.example@example.com", "options": {} }' | wasmtime obfuscate.wasm
 ```
 
