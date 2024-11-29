@@ -1,6 +1,6 @@
 :warning: STILL IN ALPHA, NOT READY FOR ANY USE
 
-Note: this is a friendlier option for Node.js users and other runtimes (Bun, Deno, and others) that wants to use this package
+Note: this is a friendlier option for Node.js users and other runtimes (Bun, Deno, and others) that wants to use ESM instead of Commonjs. It also supports types too!
 
 Even though the original package provides the types, but the package explicitly exporting to the plain, javascript bundle version. That makes the types gone
 <details>
