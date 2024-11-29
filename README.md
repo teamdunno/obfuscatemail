@@ -33,7 +33,7 @@ $ pnpm dlx jsr add @teamdunno/obfuscate-mail
 ## Installation for non-Nodejs
 For Bun
 ```
-$ bunx add @teamdunno/obfuscate-mail
+$ bunx jsr add @teamdunno/obfuscate-mail
 ```
 For Deno
 ```
@@ -95,6 +95,43 @@ echo '{ "email": "example.example@example.com", "options": {} }' | wasmtime obfu
 > `=> "exa***.e***le@***.com"%`
 
 ## Examples
+### Setup
+You may need to install `jsr:@std/expect`. Install & import like the first setup, or open the detailed version at the bottom of the text
+<details>
+
+#### Installation for Nodejs
+For npm
+```shell
+$ npx jsr add @std/expect
+```
+For Yarn
+> Note: You need to upgrade to v4+, because when installing Yarn, the distribution for Linux only sticks to v1 (thats why the `dlx` command dosent found)
+>
+> ```shell
+> $ yarn upgrade
+> ```
+```shell
+$ yarn dlx jsr add @std/expect
+```
+For pnpm
+```shell
+$ pnpm dlx jsr add @std/expect
+```
+#### Installation for non-Nodejs
+For Bun
+```
+$ bunx jsr add @std/expect
+```
+For Deno
+```
+$ deno add jsr:@std/expect
+```
+#### Usage (for any runtime)
+```js
+import { assert } from "@std/assert"
+```
+</details>
+Heres the examples
 
 ```js
 const result = obfuscate('example@example.com');
