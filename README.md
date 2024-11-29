@@ -1,10 +1,44 @@
-# obfuscate mail
+Note: this is a friendlier option for Node.js users and other runtimes (Bun, Deno, and others) that wants to use this package
 
-[![npm](https://img.shields.io/npm/v/obfuscate-mail)](https://www.npmjs.com/package/obfuscate-mail)
-![Tests](https://github.com/rawpixel-vincent/obfuscate-mail/actions/workflows/node.js.yml/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/rawpixel-vincent/obfuscate-mail/badge.svg)](https://coveralls.io/github/rawpixel-vincent/obfuscate-mail?branch=main)
-[![CodeQL](https://github.com/rawpixel-vincent/obfuscate-mail/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/rawpixel-vincent/obfuscate-mail/actions/workflows/codeql-analysis.yml)
-![license](https://img.shields.io/npm/l/obfuscate-mail)
+Even though the original package provides the types, but the package explicitly exporting to the plain, javascript bundle version. That makes the types gone
+<details>
+<summary>Screenshot</summary>
+  
+<img width="441" alt="image" src="https://github.com/user-attachments/assets/e7d5874a-6a53-4f9a-8707-1a742ebb3104">
+
+</details>
+
+To install, you need to use JSR so it passes to the compile/transpille <sup>whatever it is</sup> process automatically
+
+## Installation for Nodejs
+For npm
+```shell
+$ npx jsr add @teamdunno/obfuscate-mail
+```
+For Yarn
+> Note: You need to upgrade to v4+, because when installing Yarn, the distribution for Linux only sticks to v1 (thats why the `dlx` command dosent found)
+>
+> ```shell
+> $ yarn upgrade
+> ```
+```shell
+$ yarn dlx jsr add @teamdunno/obfuscate-mail
+```
+For pnpm
+```shell
+$ pnpm dlx jsr add @teamdunno/obfuscate-mail
+```
+## Installation for non-Nodejs
+For Bun
+```
+$ bunx add @teamdunno/obfuscate-mail
+```
+For Deno
+```
+$ deno add jsr:@teamdunno/obfuscate-mail
+```
+
+# obfuscate mail
 
 Email addresses should never been displayed by an api unless specifically requested by a recently authentified user.
 
