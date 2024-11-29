@@ -1,3 +1,5 @@
+:warning: STILL IN ALPHA, NOT READY FOE ANY USE
+
 Note: this is a friendlier option for Node.js users and other runtimes (Bun, Deno, and others) that wants to use this package
 
 Even though the original package provides the types, but the package explicitly exporting to the plain, javascript bundle version. That makes the types gone
