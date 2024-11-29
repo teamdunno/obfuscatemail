@@ -1,6 +1,7 @@
-const { expect } = require('chai');
-const { describe, it } = require('mocha');
-
+import { assertEquals, assert } from "jsr:@std/assert";
+import obfuscate from "./mod.ts"
+// Deno has ended support for 'assert' keyword (not @std/assert), so just do this
+import fakeEmailData from "./data/email_data.json" with {type:"json"}
 const getObfuscatedCharactersCount = (clearEmail, obfuscatedEmail) => {
   const visibleCharactersLength = obfuscatedEmail
     .split('@')[0]
@@ -8,26 +9,23 @@ const getObfuscatedCharactersCount = (clearEmail, obfuscatedEmail) => {
     .filter((c) => c !== '*').length;
   return clearEmail.split('@')[0].length - visibleCharactersLength;
 };
-
-describe('Obfuscate Email', () => {
-  it(`obfuscate('example@example.com') should return "exa******@***.com"`, () => {
-    const result = obfuscate('example@example.com');
-    expect(result).equal('exa******@***.com');
-    expect(
-      getObfuscatedCharactersCount('example@example.com', result),
-    ).greaterThanOrEqual(DEFAULT_OPTIONS.minimumNameObfuscationLength);
-  });
-  it(`obfuscate('example.example@example.com') should return "exa***.e***le@***.com"`, () => {
+// to fix so many test objects, we're gonna make it short instead 
+  function isCorrectEmail(email:string){
+    Deno.test(`obfuscate('example@example.com') should return "exa******@***.com"`, () => {
+      const result = obfuscate('example@example.com');
+      assertEquals(result, 'exa******@***.com')
+      assert(getObfuscatedCharactersCount('example@example.com', result)>=DEFAULT_OPTION.minimumNameObfuscationLength, `Obfuscated characters count dosent equal or greater than minimum obfuscation length`)
+    });
+  }
+  Deno.test(`obfuscate('example.example@example.com') should return "exa***.e***le@***.com"`, () => {
     const result = obfuscate('example.example@example.com');
-    expect(result).equal('exa***.e***le@***.com');
-    expect(
-      getObfuscatedCharactersCount('example.example@example.com', result),
-    ).greaterThanOrEqual(DEFAULT_OPTIONS.minimumNameObfuscationLength);
+    assertEquals(result, 'exa***.e***le@***.com');
+    assert(getObfuscatedCharactersCount('example.example@example.com', result)>=DEFAULT_OPTION.minimumNameObfuscationLength, `Obfuscated characters count dosent equal or greater than minimum obfuscation length`)
   });
 
-  it(`obfuscate('e@example.com') should return "******@***.com"`, () => {
+  Deno.test(`obfuscate('e@example.com') should return "******@***.com"`, () => {
     const result = obfuscate('e@example.com');
-    expect(result).equal('******@***.com');
+    assertEquals(result).equal('******@***.com');
     expect(
       getObfuscatedCharactersCount('e@example.com', result),
     ).greaterThanOrEqual(1);
@@ -202,11 +200,8 @@ describe('Obfuscate Email', () => {
     expect(result).equal('invalid email');
   });
   it(`obfuscate 1000 naugthy email without throwing`, async () => {
-    const json = await require('fs/promises').readFile(
-      './test/data/email_data.json',
-    );
-    const emails = JSON.parse(json);
-    emails.forEach(({ email }) => {
+    
+    fakeEmailData.forEach(({ email }) => {
       const result = obfuscate(email);
       expect(result.length).greaterThan(0);
       if (email) {
@@ -222,4 +217,3 @@ describe('Obfuscate Email', () => {
       }
     });
   });
-});
