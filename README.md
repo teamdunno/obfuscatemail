@@ -1,4 +1,4 @@
-:warning: STILL IN ALPHA, NOT READY FOE ANY USE
+:warning: STILL IN ALPHA, NOT READY FOR ANY USE
 
 Note: this is a friendlier option for Node.js users and other runtimes (Bun, Deno, and others) that wants to use this package
 
