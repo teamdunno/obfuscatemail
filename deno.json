@@ -1,7 +1,11 @@
 {
   "name": "@dunno/obfuscate-mail",
   "version": "1.5.1",
-  "exports": "./mod.ts",
+  "exports": {
+    ".":"./mod.ts",
+    "./gen-wasm":"./run/gen-wasm.ts",
+    "./test":"./test/main.ts"
+  },
   "test":{"include":["test/main.ts"]},
   "lint": {
     "include":["./*.ts", "**/*.ts", "test/**/*.json"],
