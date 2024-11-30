@@ -2,7 +2,7 @@
   "name": "@dunno/obfuscate-mail",
   "version": "1.5.1",
   "exports": "./mod.ts",
-  "test":""
+  "test":{"include":["test/main.ts"]},
   "lint": {
     "include":["./*.ts", "**/*.ts", "test/**/*.json"],
     "rules": {
@@ -11,7 +11,7 @@
   }
   "fmt":{
     "include":["./*.ts", "**/*.ts", "test/**/*.json"],
-    "printWidth": 80,
+    "lineWidth": 80,
     "singleQuote": true
   },
   "publish":{"include":["./*.ts", "**/*.ts", "test/**/*.json", "README.md", "LICENSE"]}
