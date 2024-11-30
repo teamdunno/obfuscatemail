@@ -1,15 +1,14 @@
-const { getOptions, DEFAULT_OPTIONS } = require('./utils');
-
+// export * from "./utils.ts"
+import {type Options, getOptions, DEFAULT_OPTIONS} from "./utils.ts"
+export type {Options}
+export {DEFAULT_OPTIONS}
 /**
  * Obfuscate an email.
- * @param {string} email
- * @param {import('./utils').Options} [options=DEFAULT_OPTIONS]
  * @returns {string}
  * @throws {Error} if an option type is invalid.
  */
-const obfuscateEmail = (email, options = DEFAULT_OPTIONS) => {
+export function obfuscateEmail (email:string, options?:Nullish<Options>):string {
   const opts = getOptions(options);
-
   if (
     typeof email !== 'string' ||
     email.length === 0 ||
@@ -23,40 +22,40 @@ const obfuscateEmail = (email, options = DEFAULT_OPTIONS) => {
   const [domainName, domainExtension = '***'] = domain.split('.');
 
   const visibleCharactersStartLength =
-    opts.visibleCharactersStartLength > 0 && name.length > 1
+    opts.visibleCharacters.startLength > 0 && name.length > 1
       ? Math.min(
-          name.length - opts.minimumNameObfuscationLength > 0
-            ? name.length - opts.minimumNameObfuscationLength
+          name.length - opts.minimumLength > 0
+            ? name.length - opts.minimumLength
             : 0,
-          opts.visibleCharactersStartLength,
+          opts.visibleCharacters.startLength,
         )
       : 0;
 
   const visibleCharactersEndLength =
-    opts.visibleCharactersEndLength > 0 &&
+    opts.visibleCharacters.endLength > 0 &&
     name.length >
-      visibleCharactersStartLength + opts.minimumNameObfuscationLength
+      visibleCharactersStartLength + opts.minimumLength
       ? Math.min(
           name.length -
             visibleCharactersStartLength -
-            opts.minimumNameObfuscationLength,
-          opts.visibleCharactersEndLength,
+            opts.minimumLength,
+          opts.visibleCharacters.endLength,
         )
       : 0;
 
   const visibleCharactersMiddleLength =
-    opts.visibleCharactersMiddleLength > 0 &&
+    opts.visibleCharacters.middleLength > 0 &&
     name.length -
       visibleCharactersStartLength -
       visibleCharactersEndLength -
-      opts.minimumNameObfuscationLength >
+      opts.minimumLength >
       0
       ? Math.min(
           name.length -
             visibleCharactersStartLength -
             visibleCharactersEndLength -
-            opts.minimumNameObfuscationLength,
-          opts.visibleCharactersMiddleLength,
+            opts.minimumLength,
+          opts.visibleCharacters.middleLength,
         )
       : 0;
 
@@ -92,5 +91,5 @@ const obfuscateEmail = (email, options = DEFAULT_OPTIONS) => {
   }.${opts.showDomainExtension ? domainExtension : '***'}`;
 };
 
-module.exports = obfuscateEmail;
+export default obfuscateEmail
 module.exports.DEFAULT_OPTIONS = DEFAULT_OPTIONS;
