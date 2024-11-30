@@ -1,6 +1,6 @@
 import { assertEquals, assert } from "jsr:@std/assert";
 import {Nullish, Options} from "../utils.ts"
-import obfuscate from "./mod.ts"
+import obfuscate from "../mod.ts"
 // Deno has ended support for 'assert' keyword (not @std/assert), so just do this
 import fakeEmailData from "./data/email_data.json" with {type:"json"}
 const getObfuscatedCharactersCount = (clearEmail, obfuscatedEmail) => {
