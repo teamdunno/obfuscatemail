@@ -21,14 +21,14 @@ export interface Options {
     invalidEmailValue: string
 }
 /** Undefined value */
-export type Undef = null|undefined
-function undef<T>(value:T):T is undefined|null{
+export type Undef = null|undefined;
+function undef<T extends unknown>(value:T): boolean {
 return typeof value === "undefined" || value === null
 }
 /** Make every objects Null-ish */
 export type Nullish<T> = {[K in keyof T]+?:T[K] extends object?(T[K]|null):Nullish<T[K]>}|Undef
 function getOptionsProto<T extends object>(options:Nullish<T>, def:T, fromDes?:string): T {
-  let res:{[key:string]:(T[keyof T])}=def
+  const res:T=def
   if (!options||Object.keys(options).length<1) {
     return res
   }
@@ -37,17 +37,19 @@ function getOptionsProto<T extends object>(options:Nullish<T>, def:T, fromDes?:s
       if (undef(v)){
          continue
       }
-      if (typeof res[_k]!==typeof v || (res[_k] instanceof Array) !== (v instanceof Array)) {
+      const resDyn = (res as {[key:string]:T[keyof T]})
+      if (typeof resDyn[_k]!==typeof v || (resDyn[_k] instanceof Array) !== (v instanceof Array)) {
         throw new TypeError(`Object ${fromDes?`${fromDes}.`:""}${_k} type needs to be same as Options.${fromDes?`${fromDes}.`:""}${_k}`)
       }
-      const k = _k as keyof T
+      const k:keyof T = _k as keyof T
       if (typeof v==="object" && !(v instanceof Array)){
-        res[k] = getOptionsProto<T[k] extends object?T[k]:object>(v, res[k], fromDes?`${fromDes}.${k}`:k)
+        type Nested = T[typeof k] extends Record<string, unknown>?T[typeof k]:never
+        res[k] = getOptionsProto<Nested>(v, res[k] as Nested, fromDes?`${fromDes}.${String(k)}`:String(k))
       } else {
-        res[k] = v
+        res[k] = v as T[keyof T]
       }
   }
-    return res as T
+    return res
 };
 /**
  * @param {Options} options
@@ -56,6 +58,7 @@ function getOptionsProto<T extends object>(options:Nullish<T>, def:T, fromDes?:s
 export function getOptions(options:Nullish<Options>):Options{
     return getOptionsProto<Options>(options, DEFAULT_OPTIONS)
 }
+/** Default options **/
 export const DEFAULT_OPTIONS:Options = {
     asterisksLength: 6,
     minimumLength: 4,
@@ -68,3 +71,4 @@ export const DEFAULT_OPTIONS:Options = {
     showDomainExtension: true,
     invalidEmailValue: '*********@****.**'
 }
+
