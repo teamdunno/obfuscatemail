@@ -22,44 +22,43 @@ export interface Options {
 }
 /** Undefined value */
 export type Undef = null|undefined
+function undef<T>(value:T):T is undefined|null{
+return typeof value === "undefined" || value === null
+}
 /** Make every objects Null-ish */
 export type Nullish<T> = {[K in keyof T]+?:T[K] extends object?(T[K]|null):Nullish<T[K]>}|Undef
-function checkOptionValue<T extends keyof Options>(key:T, value:T|Undef):Options[T] {
-  if (typeof value === "undefined" || value === null) {
-    return DEFAULT_OPTIONS[key];
+function getOptionsProto<T extends object>(options:Nullish<T>, def:T, fromDes?:string): T {
+  let res:{[key:string]:(T[keyof T])}=def
+  if (!options||Object.keys(options).length<1) {
+    return res
   }
-  if (typeof DEFAULT_OPTIONS[key] !== typeof value) {
-    throw new Error(
-      `Option ${key} must be of type ${typeof DEFAULT_OPTIONS[key]}`,
-    );
+  for (const [_k, v] of Object.entries(options!)) {
+      // typescript dosent resolve types on RT, only CT
+      if (undef(v)){
+         continue
+      }
+      if (typeof res[_k]!==typeof v || (res[_k] instanceof Array) !== (v instanceof Array)) {
+        throw new TypeError(`Object ${fromDes?`${fromDes}.`:""}${_k} type needs to be same as Options.${fromDes?`${fromDes}.`:""}${_k}`)
+      }
+      const k = _k as keyof T
+      if (typeof v==="object" && !(v instanceof Array)){
+        res[k] = getOptionsProto<T[k] extends object?T[k]:object>(v, res[k], fromDes?`${fromDes}.${k}`:k)
+      } else {
+        res[k] = v
+      }
   }
-  return value;
-}
-
+    return res as T
+};
 /**
  * @param {Options} options
  * @returns {Options}
  */
-export function getOptions(options:Nullish<Options>): Options {
-  // fast iterator here we gooo
-  let res:Options=DEFAULT_OPTIONS
-  if (!options) {
-    return DEFAULT_OPTIONS
-  };
-  const keys = Object.keys(options)
-  if (keys.length<1) {
-    return DEFAULT_OPTIONS
-  }
-  for (const [_k] of Object.entries(DEFAULT_OPTIONS)) {
-    const k = _k as keyof Options
-    if (!options) {return DEFAULT_OPTIONS}
-    if (typeof options[k] === "undefined" || options[k])
-    res[k] = checkOptionValue(k, options[k])
-  }
-};
+export function getOptions(options:Nullish<Options>):Options{
+    return getOptionsProto<Options>(options, DEFAULT_OPTIONS)
+}
 export const DEFAULT_OPTIONS:Options = {
     asterisksLength: 6,
-    minimumNameObfuscationLength: 4,
+    minimumLength: 4,
     visibleCharacters: {
         startLength:3,
         middleLength: 2,
