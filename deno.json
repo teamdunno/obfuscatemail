@@ -11,7 +11,7 @@
   "tasks":{
     "prepublish": {
       "description": "Prepublish script",
-      "command": "deno fmt; deno lint"
+      "command": "deno test; deno fmt; deno lint"
     },
     "bundle": {
       "description": "Bundle `mod.ts` into esm, cjs, and wasm",
