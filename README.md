@@ -128,7 +128,7 @@ $ deno add jsr:@std/expect
 ```
 #### Usage (for any runtime)
 ```js
-import { assert } from "@std/assert"
+import { expect } from "@std/expect"
 ```
 </details>
 Heres the examples
