@@ -15,7 +15,7 @@ export interface Options {
     }
     /** Show domain name? (those `*@example.*`) */
     showDomainName: boolean,
-    /** Show domain name? (those `*@*.com`) */
+    /** Show domain extension? (those `*@*.com`) */
     showDomainExtension: boolean,
     /** The fallback if the provided email isnt valid */
     invalidEmailValue: string
@@ -25,7 +25,7 @@ export type Undef = null|undefined
 /** Make every objects Null-ish */
 export type Nullish<T> = {[K in keyof T]+?:T[K] extends object?(T[K]|null):Nullish<T[K]>}|Undef
 function checkOptionValue(key:keyof Options, value:Options[keyof Options]|null|undefined):Options[keyof Options] {
-  if (value === undefined || value === null) {
+  if (typeof value === "undefined" || value === null) {
     return DEFAULT_OPTIONS[key];
   }
   if (typeof DEFAULT_OPTIONS[key] !== typeof value) {
