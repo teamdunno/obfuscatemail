@@ -2,7 +2,7 @@
 
 Note: this is a friendlier option for Node.js users and other runtimes (Bun, Deno, and others) that wants to use ESM instead of Commonjs. It also supports types too!
 
-Even though the original package provides the types, but the package explicitly exporting to the plain, javascript bundle version. That makes the types gone
+Even though the original package ([npm:obfuscate-mail](https://www.npmjs.com/package/obfuscate-mail)) provides the types, but the package explicitly exporting to the plain, javascript bundle version. That makes the types gone
 <details>
 <summary>Screenshot</summary>
   
@@ -64,10 +64,41 @@ obfuscate('example.example@example.com', {
 ```
 
 > `=> exa***.e***le@***.com`
+---
+<details open>
+<summary>(click me to hide the `Migration` section)</summary>
+
+## Migration 
+This page is only for those who use the [npm:obfuscate-mail](https://www.npmjs.com/package/obfuscate-mail) package. For newcomer, its fine 😉
+
+After those imports, you need some changed to your files also
+
+For Options,
+
+- `minimumNameObfuscationLength` was moved to `minimumLength`
+- Variables that starts with `visibleCharacters` are going to be inside the object itself, as follows:
+```js
+/* from these */
+{
+  visibleCharactersStartLength:number,
+  visibleCharactersMiddleLength:number,
+  visibleCharactersEndLength:number
+}
+/* to these */
+{
+  visibleCharacters:{
+    startLength:number,
+    middleLength:number,
+    endLength:number
+  }
+}
+```
+</details>
 
 ## Options
 
 - `asterisksLength` - default `6`
+- `visible`
 - `minimumNameObfuscationLength` - default `4`
 - `visibleCharactersStartLength` - default `3`
 - `visibleCharactersMiddleLength` - default `2`
