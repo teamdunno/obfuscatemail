@@ -15,7 +15,7 @@ To install, you need to use JSR so it passes to the compile/transpille <sup>what
 ## Installation for Nodejs
 For npm
 ```shell
-$ npx jsr add @teamdunno/obfuscatemail
+$ npx jsr add @dunno/obfuscatemail
 ```
 For Yarn
 > Note: You need to upgrade to v4+, because when installing Yarn, the distribution for Linux only sticks to v1 (thats why the `dlx` command dosent found)
@@ -24,20 +24,20 @@ For Yarn
 > $ yarn upgrade
 > ```
 ```shell
-$ yarn dlx jsr add @teamdunno/obfuscatemail
+$ yarn dlx jsr add @dunno/obfuscatemail
 ```
 For pnpm
 ```shell
-$ pnpm dlx jsr add @teamdunno/obfuscatemail
+$ pnpm dlx jsr add @dunno/obfuscatemail
 ```
 ## Installation for non-Nodejs
 For Bun
 ```
-$ bunx jsr add @teamdunno/obfuscatemail
+$ bunx jsr add @dunno/obfuscatemail
 ```
 For Deno
 ```
-$ deno add jsr:@teamdunno/obfuscatemail
+$ deno add jsr:@dunno/obfuscatemail
 ```
 
 # obfuscate mail
