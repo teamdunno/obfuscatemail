@@ -9,6 +9,16 @@
     "./bundle/esm":"./bundle/esm.js",
     "./bundle/cjs":"./bundle/cjs.js"
   },
+  "tasks":{
+    "prepublish": {
+      "description": "Prepublish script",
+      "command": "deno fmt; deno lint"
+    },
+    "bundle": {
+      "description": "Bundle `mod.ts` into esm, cjs (idk), and wasm",
+      "command": "deno run --allow-read --allow-write ./build/main.ts"
+    }
+  },
   "test":{"include":["test/main.ts"]},
   "lint": {
     "include":["**/*.ts", "test/**/*.json"],
