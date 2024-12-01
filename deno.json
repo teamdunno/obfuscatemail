@@ -3,20 +3,20 @@
   "version": "1.5.1",
   "exports": {
     ".":"./mod.ts",
-    "./gen-wasm":"./run/gen-wasm.ts",
+    "./wasm":"./mod.wasm",
     "./test":"./test/main.ts"
   },
   "test":{"include":["test/main.ts"]},
   "lint": {
-    "include":["./*.ts", "**/*.ts", "test/**/*.json"],
+    "include":["**/*.ts", "**/*.wasm", "test/**/*.json"],
     "rules": {
       "tags":["recommended"]
     }
   }
   "fmt":{
-    "include":["./*.ts", "**/*.ts", "test/**/*.json"],
+    "include":["**/*.ts", "**/*.wasm", "test/**/*.json"],
     "lineWidth": 80,
     "singleQuote": true
   },
-  "publish":{"include":["./*.ts", "**/*.ts", "test/**/*.json", "README.md", "LICENSE"]}
+  "publish":{"include":["**/*.ts", "**/*.wasm", "test/**/*.json", "README.md", "LICENSE"]}
 }
