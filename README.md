@@ -47,11 +47,7 @@ Email addresses should never been displayed by an api unless specifically reques
 This library gives the options to obfuscate email addresses will leaving them more or less identifiable.
 
 ```js
-const obfuscate = require('obfuscatemail');
-```
-
-```js
-import obfuscate from 'obfuscatemail';
+import obfuscate from '@dunno/obfuscatemail';
 ```
 
 ```js
