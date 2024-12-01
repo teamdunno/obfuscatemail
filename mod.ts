@@ -92,4 +92,3 @@ export function obfuscateEmail (email:string, options?:Nullish<Options>):string 
 };
 
 export default obfuscateEmail
-module.exports.DEFAULT_OPTIONS = DEFAULT_OPTIONS;
