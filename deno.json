@@ -8,13 +8,13 @@
   },
   "test":{"include":["test/main.ts"]},
   "lint": {
-    "include":["**/*.ts", "**/*.wasm", "test/**/*.json"],
+    "include":["**/*.ts", "test/**/*.json"],
     "rules": {
       "tags":["recommended"]
     }
   }
   "fmt":{
-    "include":["**/*.ts", "**/*.wasm", "test/**/*.json"],
+    "include":["**/*.ts", "test/**/*.json"],
     "lineWidth": 80,
     "singleQuote": true
   },
