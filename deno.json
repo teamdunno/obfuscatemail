@@ -3,11 +3,10 @@
   "version": "1.5.1",
   "exports": {
     ".":"./mod.ts",
-    "./wasm":"./mod.wasm",
     "./test":"./test/main.ts",
-    "./bundle/mjs":"./bundle/esm.js",
-    "./bundle/esm":"./bundle/esm.js",
-    "./bundle/cjs":"./bundle/cjs.js"
+    "./dist/esm":"./dist/esm.js",
+    "./dist/wasm":"./dist.wasm",
+    "./dist/cjs":"./dist/cjs.js"
   },
   "tasks":{
     "prepublish": {
@@ -15,7 +14,7 @@
       "command": "deno fmt; deno lint"
     },
     "bundle": {
-      "description": "Bundle `mod.ts` into esm, cjs (idk), and wasm",
+      "description": "Bundle `mod.ts` into esm, cjs, and wasm",
       "command": "deno run --allow-read --allow-write ./build/main.ts"
     }
   },
