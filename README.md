@@ -15,7 +15,7 @@ To install, you need to use JSR so it passes to the compile/transpille <sup>what
 ## Installation for Nodejs
 For npm
 ```shell
-$ npx jsr add @teamdunno/obfuscate-mail
+$ npx jsr add @teamdunno/obfuscatemail
 ```
 For Yarn
 > Note: You need to upgrade to v4+, because when installing Yarn, the distribution for Linux only sticks to v1 (thats why the `dlx` command dosent found)
@@ -24,20 +24,20 @@ For Yarn
 > $ yarn upgrade
 > ```
 ```shell
-$ yarn dlx jsr add @teamdunno/obfuscate-mail
+$ yarn dlx jsr add @teamdunno/obfuscatemail
 ```
 For pnpm
 ```shell
-$ pnpm dlx jsr add @teamdunno/obfuscate-mail
+$ pnpm dlx jsr add @teamdunno/obfuscatemail
 ```
 ## Installation for non-Nodejs
 For Bun
 ```
-$ bunx jsr add @teamdunno/obfuscate-mail
+$ bunx jsr add @teamdunno/obfuscatemail
 ```
 For Deno
 ```
-$ deno add jsr:@teamdunno/obfuscate-mail
+$ deno add jsr:@teamdunno/obfuscatemail
 ```
 
 # obfuscate mail
@@ -47,11 +47,11 @@ Email addresses should never been displayed by an api unless specifically reques
 This library gives the options to obfuscate email addresses will leaving them more or less identifiable.
 
 ```js
-const obfuscate = require('obfuscate-mail');
+const obfuscate = require('obfuscatemail');
 ```
 
 ```js
-import obfuscate from 'obfuscate-mail';
+import obfuscate from 'obfuscatemail';
 ```
 
 ```js
@@ -85,7 +85,7 @@ obfuscate('example.example@example.com', {
 ## Web assembly binary (WASI-compatible)
 
 ```sh
-curl -o obfuscate.wasm https://raw.githubusercontent.com/rawpixel-vincent/obfuscate-mail/main/dist/bundle.wasm
+curl -o obfuscate.wasm https://raw.githubusercontent.com/rawpixel-vincent/obfuscatemail/main/dist/bundle.wasm
 ```
 
 ```sh
