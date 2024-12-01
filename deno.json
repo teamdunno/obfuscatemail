@@ -5,7 +5,7 @@
     ".":"./mod.ts",
     "./test":"./test/main.ts",
     "./dist/esm":"./dist/esm.js",
-    "./dist/wasm":"./dist/wasm",
+    "./dist/wasm":"./dist/.wasm",
     "./dist/cjs":"./dist/cjs.js"
   },
   "tasks":{
@@ -24,7 +24,7 @@
     "rules": {
       "tags":["recommended"]
     }
-  }
+  },
   "fmt":{
     "include":["**/*.ts", "test/**/*.json"],
     "lineWidth": 80,
