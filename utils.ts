@@ -3,13 +3,16 @@ export interface Options {
     /** Specify how long the asterisks `*` length would be */
     asterisksLength: number,
     /** Set the minimum obfuscated mail length */
-    minimumNameObfuscationLength: number,
-    /** Expand the visible characters. On the first part */
-    visibleCharactersStartLength: number,
-    /** Expand the visible characters. On the middle part */
-    visibleCharactersMiddleLength: number,
-    /** Expand the visible characters. On the last part */
-    visibleCharactersEndLength: number,
+    minimumLength: number,
+    /** Visible Characters options */
+    visibleCharacters:{
+        /** Expand the visible characters. On the first part */
+        startLength: number,
+        /** Expand the visible characters. On the middle part */
+        middleLength: number,
+        /** Expand the visible characters. On the last part */
+        endLength: number
+    }
     /** Show domain name? (those `*@example.*`) */
     showDomainName: boolean,
     /** Show domain name? (those `*@*.com`) */
@@ -20,7 +23,7 @@ export interface Options {
 /** Undefined value */
 export type Undef = null|undefined
 /** Make every objects Null-ish */
-export type Nullish<T> = {[K in keyof T]+?:T[K]|null}|Undef
+export type Nullish<T> = {[K in keyof T]+?:T[K] extends object?(T[K]|null):Nullish<T[K]>}|Undef
 function checkOptionValue(key:keyof Options, value:Options[keyof Options]|null|undefined):Options[keyof Options] {
   if (value === undefined || value === null) {
     return DEFAULT_OPTIONS[key];
@@ -57,9 +60,11 @@ export function getOptions(options:Nullish<Options>): Options {
 export const DEFAULT_OPTIONS:Options = {
     asterisksLength: 6,
     minimumNameObfuscationLength: 4,
-    visibleCharactersStartLength: 3,
-    visibleCharactersMiddleLength: 2,
-    visibleCharactersEndLength: 2,
+    visibleCharacters: {
+        startLength:3,
+        middleLength: 2,
+        endLength: 2
+    },
     showDomainName: false,
     showDomainExtension: true,
     invalidEmailValue: '*********@****.**'
