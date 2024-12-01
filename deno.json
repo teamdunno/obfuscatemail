@@ -4,7 +4,10 @@
   "exports": {
     ".":"./mod.ts",
     "./wasm":"./mod.wasm",
-    "./test":"./test/main.ts"
+    "./test":"./test/main.ts",
+    "./bundle/mjs":"./bundle/esm.js",
+    "./bundle/esm":"./bundle/esm.js",
+    "./bundle/cjs":"./bundle/cjs.js"
   },
   "test":{"include":["test/main.ts"]},
   "lint": {
