@@ -1,5 +1,5 @@
 // export * from "./utils.ts"
-import {type Options, getOptions, DEFAULT_OPTIONS} from "./utils.ts"
+import {type Options, type Nullish, getOptions, DEFAULT_OPTIONS} from "./utils.ts"
 export type {Options}
 export {DEFAULT_OPTIONS}
 /**
