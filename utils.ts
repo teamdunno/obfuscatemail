@@ -24,7 +24,7 @@ export interface Options {
 export type Undef = null|undefined
 /** Make every objects Null-ish */
 export type Nullish<T> = {[K in keyof T]+?:T[K] extends object?(T[K]|null):Nullish<T[K]>}|Undef
-function checkOptionValue(key:keyof Options, value:Options[keyof Options]|null|undefined):Options[keyof Options] {
+function checkOptionValue(key:keyof Options, value:Options[keyof Options]|Undef):Options[keyof Options] {
   if (typeof value === "undefined" || value === null) {
     return DEFAULT_OPTIONS[key];
   }
