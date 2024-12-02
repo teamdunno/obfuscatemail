@@ -114,7 +114,7 @@ You can do this. Though, some features was 'nerfed' to respect the Rust language
 - `DEFAULT_OPTIONS` is erased from the module:
 - - Since `String` is automatically converted to Javascript's string on wasm, however, you actually cant do that in static since `String` uses heap. That makes it cant evaluate at Compile Time. You can't even use `JsValue` to that, the compiler will asks you the same thing. OR
   - If you are using Rust, instead of WebAssembly, you can use `Options::default()`
-- And theres two struct to manage these, `Options` for default options used on `(not exported) passOptions(options:Options)` and `NullishOptions` for the main `obfuscateMail(name:&str, options:JsValue)` function
+- And theres two structs to manage these, `Options` for default options used on `(not exported) passOptions(options:Options)` and `NullishOptions` for the main `obfuscateMail(name:&str, options:JsValue)` function
 
 ## Examples
 ### Setup
