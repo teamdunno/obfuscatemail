@@ -1,7 +1,9 @@
 :warning: STILL IN ALPHA, NOT READY FOR ANY USE
 
 Note: this is a friendlier option for Node.js users and other runtimes (Bun, Deno, and others) that wants to use ESM instead of Commonjs. It also supports types too!
-
+<details>
+<summary>Why we made this package?</summary>
+  
 Even though the original package ([npm:obfuscate-mail](https://www.npmjs.com/package/obfuscate-mail)) provides the types, but the package explicitly exporting to the plain, javascript bundle version. That makes the types gone
 <details>
 <summary>Screenshot</summary>
@@ -9,7 +11,7 @@ Even though the original package ([npm:obfuscate-mail](https://www.npmjs.com/pac
 <img width="441" alt="image" src="https://github.com/user-attachments/assets/e7d5874a-6a53-4f9a-8707-1a742ebb3104">
 
 </details>
-
+</details>
 To install, you need to use JSR so it passes to the compile/transpille <sup>whatever it is</sup> process automatically
 
 ## Installation for Nodejs
@@ -93,29 +95,22 @@ For Options,
   }
 }
 ```
+Also, wasm (for this package) was deprecated for some reason. So theres no separate preloader `wasm.js` or the wasm itself `bundle.wasm`
 </details>
 
 ## Options
 
 - `asterisksLength` - default `6`
-- `visible`
-- `minimumNameObfuscationLength` - default `4`
-- `visibleCharactersStartLength` - default `3`
-- `visibleCharactersMiddleLength` - default `2`
-- `visibleCharactersEndLength` - default `2`
+- `minimumLength` - default `4`
+- `visibleCharacters` : {
+  - `startLength` - default `3`
+  - `middleLength` - default `2`
+  - `endLength` - default `2`
+- }
 - `showDomainName` - default `false`
 - `showDomainExtension` - default `true`
 - `invalidEmailValue` - default `*********@****.**`
-
-## [Test it with runKit](https://runkit.com/rawpixel-vincent/obfuscate-email)
-
-## Web assembly binary (WASI-compatible)
-You can do this. Though, some features was 'nerfed' to respect the Rust language system
-- `DEFAULT_OPTIONS` is erased from the module:
-- - Since `String` is automatically converted to Javascript's string on wasm, however, you actually cant do that in static since `String` uses heap. That makes it cant evaluate at Compile Time. You can't even use `JsValue` to that, the compiler will asks you the same thing. OR
-  - If you are using Rust, instead of WebAssembly, you can use `Options::default()`
-- And theres two structs to manage these, `Options` for default options used on `(not exported) passOptions(options:Options)` and `NullishOptions` for the main `obfuscateMail(name:&str, options:JsValue)` function
-
+- 
 ## Examples
 ### Setup
 You may need to install `jsr:@std/expect`. Install & import like the first setup, or open the detailed version at the bottom of the text
