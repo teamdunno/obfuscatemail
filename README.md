@@ -112,7 +112,7 @@ For Options,
 ## Web assembly binary (WASI-compatible)
 You can do this. Though, some features was 'nerfed' to respect the Rust language system
 - `DEFAULT_OPTIONS` is erased from the module:
- - Since `String` is automatically converted to Javascript's string on wasm, however, you actually cant do that in static since `String` uses heap. That makes it cant evaluate at Compile Time. You can't even use `JsValue` to that, the compiler will asks you the same thing
+- - Since `String` is automatically converted to Javascript's string on wasm, however, you actually cant do that in static since `String` uses heap. That makes it cant evaluate at Compile Time. You can't even use `JsValue` to that, the compiler will asks you the same thing
 - ANd theres two struct to manage these, `Options` and `NullishOptions`
 
 ## Examples
