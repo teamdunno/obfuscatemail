@@ -110,16 +110,10 @@ For Options,
 ## [Test it with runKit](https://runkit.com/rawpixel-vincent/obfuscate-email)
 
 ## Web assembly binary (WASI-compatible)
-
-```sh
-curl -o obfuscate.wasm https://raw.githubusercontent.com/rawpixel-vincent/obfuscatemail/main/dist/bundle.wasm
-```
-
-```sh
-echo '{ "email": "example.example@example.com", "options": {} }' | wasmtime obfuscate.wasm
-```
-
-> `=> "exa***.e***le@***.com"%`
+You can do this. Though, some features was 'nerfed' to respect the Rust language system
+- `DEFAULT_OPTIONS` is erased from the module:
+ - Since `String` is automatically converted to Javascript's string on wasm, however, you actually cant do that in static since `String` uses heap. That makes it cant evaluate at Compile Time. You can't even use `JsValue` to that, the compiler will asks you the same thing
+- ANd theres two struct to manage these, `Options` and `NullishOptions`
 
 ## Examples
 ### Setup
