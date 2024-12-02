@@ -38,9 +38,6 @@
     "lineWidth": 80,
     "singleQuote": true
   },
-  "publish":{"include":["**/*.ts", "test/**/*.json", "README.md", "LICENSE"]},
-  "imports": {
-    "@cross/runtime": "jsr:@cross/runtime@^1.1.0"
-  }
+  "publish":{"include":["**/*.ts", "test/**/*.json", "README.md", "LICENSE"]}
 }
 
