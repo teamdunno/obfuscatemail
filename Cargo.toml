@@ -1,0 +1,11 @@
+[package]
+name = "obfuscate-mail"
+version = "0.1.0"
+edition = "2021"
+[lib]
+crate-type = ["cdylib"]
+[dependencies]
+serde = "1.0.215"
+serde-wasm-bindgen = "0.6.5"
+serde_derive = "1.0.215"
+wasm-bindgen = {version="0.2.97", features=["serde", "serde-serialize", "serde_json"]}
