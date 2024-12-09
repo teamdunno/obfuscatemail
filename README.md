@@ -1,3 +1,7 @@
+<img width="441" alt="image" src="https://github.com/user-attachments/assets/708de802-6cb8-4422-a548-84d707e2f66b">
+
+> the Artwork was made by [vintheweirdass](https://github.com/vintheweirdass)
+
 :warning: STILL IN ALPHA, NOT READY FOR ANY USE
 
 Note: this is a friendlier option for Node.js users and other runtimes (Bun, Deno, and others) that wants to use ESM instead of Commonjs. It also supports types too!
