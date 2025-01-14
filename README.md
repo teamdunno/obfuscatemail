@@ -2,8 +2,6 @@
 
 > the Artwork was made by [vintheweirdass](https://github.com/vintheweirdass)
 
-:warning: STILL IN ALPHA, NOT READY FOR ANY USE
-
 Note: this is a friendlier option for Node.js users and other runtimes (Bun, Deno, and others) that wants to use ESM instead of Commonjs. It also supports types too!
 <details>
 <summary>Why we made this package?</summary>
