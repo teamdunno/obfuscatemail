@@ -4,18 +4,6 @@
   "lock": false,
   "exports": "./mod.ts",
   "tasks":{
-    "bundle": {
-      "description": "Build `mod.ts` into multiple architecture",
-      "command": "deno task bundle:cjs; deno task bundle:esm; deno task bundle:wasm"
-    },
-    "bundle:esm": {
-      "description": "Bundle `mod.ts` into esm",
-      "command": "deno run --allow-read --allow-write ./build/esm.js"
-    },
-    "bundle:cjs": {
-      "description": "Bundle `mod.ts` into cjs",
-      "command": "deno run --allow-read --allow-write ./build/cjs.js"
-    },
     "prepublish": {
       "description": "Prepublish script",
       "command": "deno test; deno fmt; deno lint"
