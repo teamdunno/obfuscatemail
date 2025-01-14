@@ -1,5 +1,6 @@
 {
   "name": "@dunno/obfuscatemail",
+  "npm:scope":"dunnojsr",
   "version": "1.5.1",
   "lock": false,
   "exports": {
