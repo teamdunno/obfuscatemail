@@ -53,16 +53,18 @@ Email addresses should never been displayed by an api unless specifically reques
 This library gives the options to obfuscate email addresses will leaving them more or less identifiable.
 
 ```js
-import obfuscate from '@dunno/obfuscatemail';
+import { obfuscate } from '@dunno/obfuscatemail';
 ```
 
 ```js
 obfuscate('example.example@example.com', {
   // asterisksLength: 6,
   // minimumNameObfuscationLength: 4,
-  // visibleCharactersStartLength: 3,
-  // visibleCharactersMiddleLength: 2,
-  // visibleCharactersEndLength: 2,
+  // visibleCharacters:{
+  //    startLength: 3,
+  //    middleLength: 2,
+  //    endLength:2,
+  // }
   // showDomainName: false,
   // showDomainExtension: true,
   // invalidEmailValue: '*********@****.**',
@@ -183,93 +185,12 @@ expect(result).equal('e******@***.com');
 const result = obfuscate('example@example.com', {
   showDomainName: true,
 });
-expect(result).equal('exa******@example.com');
-```
-
-```js
-const result = obfuscate('example.company+test@example.com', {
-  asterisksLength: 12,
-});
-expect(result).equal('exa******mp******st@*********.com');
-```
-
-```js
-const result = obfuscate('example@example.com', {
-  showDomainName: true,
-  showDomainExtension: false,
-});
-expect(result).equal('exa******@example.***');
-```
-
-```js
-const result = obfuscate('company.name@test.com', {
-  asterisksLength: 8,
-  visibleCharactersStartLength: 2,
-  visibleCharactersEndLength: 3,
-  showDomainName: false,
-});
-expect(result).equal('co****ny****ame@*****.com');
-```
-
-```js
-const result = obfuscate('company.name@test.com', {
-  visibleCharactersStartLength: 4,
-  visibleCharactersEndLength: 1,
-  minimumNameObfuscationLength: 6,
-});
-expect(result).equal('comp***.***e@***.com');
-```
-
-```js
-const result = obfuscate('company.name@test.com', {
-  visibleCharactersStartLength: 3,
-  visibleCharactersEndLength: 2,
-  minimumNameObfuscationLength: 6,
-});
-expect(result).equal('com***y***me@***.com');
-```
-
-```js
-const result = obfuscate('company.example@test.com', {
-  visibleCharactersStartLength: 2,
-  visibleCharactersMiddleLength: 3,
-  visibleCharactersEndLength: 2,
-  minimumNameObfuscationLength: 6,
-});
-expect(result).equal('co***y.e***le@***.com');
-```
-
-```js
-const result = obfuscate('company.name@test.com', {
-  visibleCharactersStartLength: 3,
-  visibleCharactersEndLength: 2,
-  minimumNameObfuscationLength: 10,
-});
-expect(result).equal('co******@***.com');
-```
-
-```js
-const result = obfuscate('company.name@test.com', {
-  visibleCharactersStartLength: 0,
-  visibleCharactersEndLength: 4,
-});
-expect(result).equal('***pa***name@***.com');
 ```
 
 ```js
 const result = obfuscate('email.without@domain-extension');
 expect(result).equal('ema***wi***ut@***.***');
 ```
-
-```js
-const result = obfuscate('abcdefgh.ijklmno@domain.com', {
-  visibleCharactersStartLength: 4,
-  visibleCharactersMiddleLength: 4,
-  visibleCharactersEndLength: 4,
-});
-expect(result).equal('abcd***gh.i***lmno@***.com');
-```
-
 ```js
 const result = obfuscate('invalid email');
 expect(result).equal('*********@****.**');
