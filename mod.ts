@@ -12,7 +12,7 @@ export { DEFAULT_OPTIONS };
  * @returns {string}
  * @throws {Error} if an option type is invalid.
  */
-export function obfuscateEmail(
+export function obfuscateMail(
   email: string,
   options?: Nullish<Options>,
 ): string {
@@ -101,5 +101,5 @@ export function obfuscateEmail(
   }.${opts.showDomainExtension ? domainExtension : '***'}`;
 }
 
-export default obfuscateEmail;
+export default obfuscateMail;
 
