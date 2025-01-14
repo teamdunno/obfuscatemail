@@ -1,6 +1,7 @@
 name: Push to master
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -20,16 +21,4 @@ jobs:
           deno-version: v2.x
       - name: Publish to JSR
         run: deno publish
-  publish-npm:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install Deno
-        uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-      - name: Publish to npm
-        run: deno run -A npm:npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AT_PUBLICPKG }}
   
