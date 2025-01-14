@@ -53,11 +53,11 @@ Email addresses should never been displayed by an api unless specifically reques
 This library gives the options to obfuscate email addresses will leaving them more or less identifiable.
 
 ```js
-import { obfuscate } from '@dunno/obfuscatemail';
+import { obfuscateMail } from '@dunno/obfuscatemail';
 ```
 
 ```js
-obfuscate('example.example@example.com', {
+obfuscateMail('example.example@example.com', {
   // asterisksLength: 6,
   // minimumNameObfuscationLength: 4,
   // visibleCharacters:{
@@ -157,46 +157,46 @@ import { expect } from "@std/expect"
 Heres the examples
 
 ```js
-const result = obfuscate('example@example.com');
+const result = obfuscateMail('example@example.com');
 expect(result).equal('exa******@***.com');
 ```
 
 ```js
-const result = obfuscate('example.example@example.com');
+const result = obfuscateMail('example.example@example.com');
 expect(result).equal('exa***.e***le@***.com');
 ```
 
 ```js
-const result = obfuscate('e@example.com');
+const result = obfuscateMail('e@example.com');
 expect(result).equal('******@***.com');
 ```
 
 ```js
-const result = obfuscate('exa@example.com');
+const result = obfuscateMail('exa@example.com');
 expect(result).equal('******@***.com');
 ```
 
 ```js
-const result = obfuscate('examp@example.com');
+const result = obfuscateMail('examp@example.com');
 expect(result).equal('e******@***.com');
 ```
 
 ```js
-const result = obfuscate('example@example.com', {
+const result = obfuscateMail('example@example.com', {
   showDomainName: true,
 });
 ```
 
 ```js
-const result = obfuscate('email.without@domain-extension');
+const result = obfuscateMail('email.without@domain-extension');
 expect(result).equal('ema***wi***ut@***.***');
 ```
 ```js
-const result = obfuscate('invalid email');
+const result = obfuscateMail('invalid email');
 expect(result).equal('*********@****.**');
 ```
 
 ```js
-const result = obfuscate(null, { invalidEmailValue: 'invalid email' });
+const result = obfuscateMail(null, { invalidEmailValue: 'invalid email' });
 expect(result).equal('invalid email');
 ```
