@@ -1,6 +1,6 @@
 {
   "name": "@dunno/obfuscatemail",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "lock": false,
   "exports": "./mod.ts",
   "tasks":{
